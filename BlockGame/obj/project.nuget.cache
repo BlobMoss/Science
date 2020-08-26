@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "DucWnG26EHbP6RklEIAbA4negot+08fW95co3dUjSp/CecCyTrVtEBQSXcr47aHzFnD5uW1EOU/V0bZCEmTLXg==",
+  "dgSpecHash": "o0jhtA8tmLMM2Dj8GWPlvMdgWJuQ673UcWvYFUHzSOQwJ9YYAg3jGDSyka6xMExaQCr4DtGEZ9HluGD9SOvGeA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\BlockGame.csproj",
+  "projectFilePath": "C:\\Users\\Melvin\\Documents\\GitHub\\Science\\BlockGame\\BlockGame.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\melvi\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\melvi\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    "C:\\Users\\Melvin\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\Melvin\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
   ],
   "logs": []
 }

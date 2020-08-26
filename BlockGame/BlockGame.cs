@@ -1,16 +1,17 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BlockGame.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BlockGame
 {
-    public class Game1 : Game
+    public class BlockGame : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Texture2D block;
+        Texture2D blockParts;
 
-        public Game1()
+        public BlockGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -26,7 +27,7 @@ namespace BlockGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            block = Content.Load<Texture2D>("block");
+            blockParts = Content.Load<Texture2D>("block_parts");
         }
 
         protected override void Update(GameTime gameTime)
@@ -41,8 +42,12 @@ namespace BlockGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            Sprite blockPartSprite = new Sprite(blockParts, 0, 0, 16, 16, Color.White);
+
             _spriteBatch.Begin();
-            _spriteBatch.Draw(block, new Vector2(300, 200),Color.White);
+
+            blockPartSprite.Draw(_spriteBatch, new Vector2(300, 200));
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
