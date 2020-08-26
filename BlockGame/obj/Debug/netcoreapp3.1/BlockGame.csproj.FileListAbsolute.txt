@@ -47,3 +47,4 @@ C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\Block
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.dll
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.pdb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.genruntimeconfig.cache
+C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_parts.xnb

@@ -4,8 +4,8 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Melvin/Documents/GitHub/Science/BlockGame/Content/block.png</File>
-    <File>C:/Users/Melvin/Documents/GitHub/Science/BlockGame/Content/block_parts.png</File>
+    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block.png</File>
+    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block_parts.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

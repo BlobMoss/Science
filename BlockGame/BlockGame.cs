@@ -1,4 +1,5 @@
-﻿using BlockGame.Graphics;
+﻿using BlockGame.Entities;
+using BlockGame.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,31 +10,39 @@ namespace BlockGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        Texture2D blockParts;
+        public static Texture2D blockTexture;
+        World world;
 
         public BlockGame()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.Title = "\"Ourcraft\"";
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-           base.Initialize();
+            base.Initialize();
+
+            world = new World(16, 16, 16);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            blockParts = Content.Load<Texture2D>("block_parts");
+            blockTexture = Content.Load<Texture2D>("block");
         }
 
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
                 Exit();
+            }
+
+            world.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -42,11 +51,9 @@ namespace BlockGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Sprite blockPartSprite = new Sprite(blockParts, 0, 0, 16, 16, Color.White);
-
             _spriteBatch.Begin();
 
-            blockPartSprite.Draw(_spriteBatch, new Vector2(300, 200));
+            world.Draw(_spriteBatch, gameTime);
 
             _spriteBatch.End();
 
