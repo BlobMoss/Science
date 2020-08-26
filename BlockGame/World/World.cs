@@ -38,7 +38,7 @@ namespace BlockGame
             {
                 for (int y = 0; y < chunks.GetLength(1); y++)
                 {
-                    for (int z = 0; z < chunks.GetLength(2); z++)
+                    for (int z = chunks.GetLength(2) - 1; z > 0; z--)
                     {
                         chunks[x, y, z].Update(gameTime);
                     }
