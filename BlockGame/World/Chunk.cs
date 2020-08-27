@@ -39,23 +39,11 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
-            for (int i = 0; i < faces.Length; i++)
+            for (int i = 0; i < faces.Count; i++)
             {
-
+                spriteBatch.Draw(BlockGame.blockTexture, faces[i].screenPosition, Color.White);
             }
-            for (int x = 0; x < size.X; x++)
-            {
-                for (int y = 0; y < size.Y; y++)
-                {
-                    for (int z = (int)size.Z - 1; z > 0; z--)
-                    {
-                        if (blocks[x, y, z] < 255)
-                        {
-                            
-                        }
-                    }
-                }
-            }
+            Debug.WriteLine("drew " + faces.Count + " blocks");
         }
     }
 }

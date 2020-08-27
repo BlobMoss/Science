@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
 
@@ -19,20 +20,29 @@ namespace BlockGame
                     {
                         if (blocks[x, y, z] < 255)
                         {
-                            BlockFace face = new BlockFace;
+                            BlockFace face = new BlockFace();
 
                             face.screenPosition.X = x * 6 + -y * 6 + 400;
                             face.screenPosition.Y = x * 4 + y * 4 + z * 7 + 120;
 
+                            /**
                             bool right = blocks[x + 1, y, z] < 255;
                             bool left = blocks[x - 1, y, z] < 255;
                             bool back = blocks[x, y + 1, z] < 255;
                             bool forward = blocks[x, y - 1, z] < 255;
                             bool up = blocks[x, y, z + 1] < 255;
                             bool down = blocks[x, y, z - 1] < 255;
+                            **/
 
                             //calculate location of each face sprite
 
+                            for (int i = 0; i < faces.Count; i++)
+                            {
+                                if (face.screenPosition == faces[i].screenPosition)
+                                {
+                                    faces.Remove(faces[i]);
+                                }
+                            }
                             faces.Add(face);
                         }
                     }
