@@ -32,7 +32,7 @@ namespace BlockGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            blockTexture = Content.Load<Texture2D>("block");
+            blockTexture = Content.Load<Texture2D>("block_faces");
         }
 
         protected override void Update(GameTime gameTime)

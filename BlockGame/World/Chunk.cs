@@ -26,6 +26,11 @@ namespace BlockGame
             blocks = new byte[(int)size.X, (int)size.Y, (int)size.Z];
             chunkPosition = pos;
 
+            blocks[8, 8, 8] = 1;
+            blocks[9, 8, 8] = 1;
+            blocks[8, 9, 8] = 1;
+            blocks[9, 9, 8] = 1;
+
             UpdateNeeded = true;
         }
 
@@ -35,15 +40,16 @@ namespace BlockGame
             {
                 UpdateSides();
                 UpdateNeeded = false;
+                Debug.WriteLine("drew " + faces.Count + " faces");
             }
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
             for (int i = 0; i < faces.Count; i++)
             {
-                spriteBatch.Draw(BlockGame.blockTexture, faces[i].screenPosition, Color.White);
+                Rectangle rect = new Rectangle((int)faces[i].spriteLocation.X, (int)faces[i].spriteLocation.Y, 16, 16);
+                spriteBatch.Draw(BlockGame.blockTexture, faces[i].screenPosition, rect, Color.White);
             }
-            Debug.WriteLine("drew " + faces.Count + " blocks");
         }
     }
 }
