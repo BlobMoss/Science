@@ -13,18 +13,30 @@ namespace BlockGame
         void UpdateSides()
         {
             faces = new List<BlockFace>();
+
+            for (int x = 1; x < size.X - 1; x++)
+            {
+                for (int y = 1; y < size.Y - 1; y++)
+                {
+                    for (int z = 1; z < size.Z - 1; z++)
+                    {
+                        blocks[x, y, z] = 1;
+                    }
+                }
+            }
+
             for (int x = 0; x < size.X; x++)
             {
                 for (int y = 0; y < size.Y; y++)
                 {
-                    for (int z = (int)size.Z - 1; z > 0; z--)
+                    for (int z = 0; z < size.Z; z++)
                     {
                         if (blocks[x, y, z] > 0)
                         {
                             Vector2 screenPosition = Vector2.Zero;
 
-                            screenPosition.X = x * 6 + -y * 6 + 400;
-                            screenPosition.Y = -x * 4 + -y * 4 + z * 7 + 120;
+                            screenPosition.X = x * 5 + -y * 5 + 400;
+                            screenPosition.Y = -x * 3 + -y * 3 + -z * 6 + 220;
 
                             bool right = blocks[Math.Min(x + 1,(int)size.X - 1), y, z] > 0;
                             bool left = blocks[Math.Max(x - 1, 0), y, z] > 0;
@@ -63,7 +75,6 @@ namespace BlockGame
         }
         Vector2 findFaceSprite(bool right,bool left,bool up, bool down)
         {
-            return new Vector2(48, 48);
             if (right)
             {
                 if (left)

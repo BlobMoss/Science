@@ -49,9 +49,9 @@ namespace BlockGame
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront);
 
             world.Draw(_spriteBatch, gameTime);
 
