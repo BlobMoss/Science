@@ -37,8 +37,8 @@ namespace BlockGame
                     for (int z = 1; z < randomZ - 1; z++)
                     {
                         Random a = new Random();
-                        int nextValue = a.Next(0,15);
-                        if (nextValue != 1)
+                        int nextValue = a.Next(0,100);
+                        if (nextValue <= 80)
                         {
                             blocks[x, y, z] = 1;
                         }

@@ -14,7 +14,7 @@ namespace BlockGame
         public int height;
         public Chunk[,] chunks;
 
-        public World(int _length, int _width, int _height)
+        public World(int _length, int _width)
         {
             length = _length;
             width = _width;

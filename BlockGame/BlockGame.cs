@@ -24,7 +24,7 @@ namespace BlockGame
         {
             base.Initialize();
 
-            world = new World(2, 2, 2);
+            world = new World(3, 3);
         }
 
         protected override void LoadContent()
