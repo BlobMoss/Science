@@ -9,5 +9,6 @@ namespace BlockGame.Graphics
     {
         public Vector2 spriteLocation;
         public Vector2 screenPosition;
+        public float depth;
     }
 }

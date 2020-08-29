@@ -1,5 +1,4 @@
-﻿using BlockGame.Entities;
-using BlockGame.Graphics;
+﻿using BlockGame.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -25,7 +24,7 @@ namespace BlockGame
         {
             base.Initialize();
 
-            world = new World(16, 16, 16);
+            world = new World(2, 2, 2);
         }
 
         protected override void LoadContent()
@@ -51,7 +50,7 @@ namespace BlockGame
         {
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront);
+            _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack);
 
             world.Draw(_spriteBatch, gameTime);
 

@@ -14,17 +14,6 @@ namespace BlockGame
         {
             faces = new List<BlockFace>();
 
-            for (int x = 1; x < size.X - 1; x++)
-            {
-                for (int y = 1; y < size.Y - 1; y++)
-                {
-                    for (int z = 1; z < size.Z - 1; z++)
-                    {
-                        blocks[x, y, z] = 1;
-                    }
-                }
-            }
-
             for (int x = 0; x < size.X; x++)
             {
                 for (int y = 0; y < size.Y; y++)
@@ -34,24 +23,71 @@ namespace BlockGame
                         if (blocks[x, y, z] > 0)
                         {
                             Vector2 screenPosition = Vector2.Zero;
+                            Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
+                            screenPosition.X =  (chunkPositionOffset.X + x) * 5 + -(chunkPositionOffset.Y + y) * 5 + 400;
+                            screenPosition.Y = -(chunkPositionOffset.X + x) * 3 + -(chunkPositionOffset.Y + y) * 3 + -z * 6 + 400;
 
-                            screenPosition.X = x * 5 + -y * 5 + 400;
-                            screenPosition.Y = -x * 3 + -y * 3 + -z * 6 + 220;
+                            float sortingOrder = screenPosition.Y - -z * 12;
 
-                            bool right = blocks[Math.Min(x + 1,(int)size.X - 1), y, z] > 0;
+                            ///**
+                            bool right = blocks[Math.Min(x + 1, (int)size.X - 1), y, z] > 0;
+                            if (x + 1 > size.X - 1)
+                            {
+                                if (chunkPosition.X + 1 < parent.chunks.GetLength(0))
+                                {
+                                    right = parent.chunks[(int)chunkPosition.X + 1, (int)chunkPosition.Y].GetBlock(0, y, z) > 0;
+                                }
+                                else
+                                {
+                                    right = false;
+                                }
+                            }
                             bool left = blocks[Math.Max(x - 1, 0), y, z] > 0;
-
+                            if (x - 1 < 0)
+                            {
+                                if (chunkPosition.X - 1 > 0)
+                                {
+                                    left = parent.chunks[(int)chunkPosition.X - 1, (int)chunkPosition.Y].GetBlock((int)size.X - 1, y, z) > 0;
+                                }
+                                else
+                                {
+                                    left = false;
+                                }
+                            }
                             bool back = blocks[x, Math.Min(y + 1, (int)size.Y - 1), z] > 0;
+                            if (y + 1 > size.Y - 1)
+                            {
+                                if (chunkPosition.Y + 1 < parent.chunks.GetLength(1))
+                                {
+                                    back = parent.chunks[(int)chunkPosition.X, (int)chunkPosition.Y + 1].GetBlock(x, 0, z) > 0;
+                                }
+                                else
+                                {
+                                    back = false;
+                                }
+                            }
                             bool forward = blocks[x, Math.Max(y - 1, 0), z] > 0;
-
+                            if (y - 1 < 0)
+                            {
+                                if (chunkPosition.Y - 1 > 0)
+                                {
+                                    forward = parent.chunks[(int)chunkPosition.X, (int)chunkPosition.Y - 1].GetBlock(x, (int)size.Y - 1, z) > 0;
+                                }
+                                else
+                                {
+                                    forward = false;
+                                }
+                            }
+                            //**/
                             bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
                             bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
-
+                            
                             if (!left)
                             {
                                 BlockFace leftFace = new BlockFace();
                                 leftFace.screenPosition = screenPosition;
                                 leftFace.spriteLocation = findFaceSprite(back, forward, up, down);
+                                leftFace.depth = sortingOrder;
                                 faces.Add(leftFace);
                             }
                             if (!forward)
@@ -59,6 +95,7 @@ namespace BlockGame
                                 BlockFace forwardFace = new BlockFace();
                                 forwardFace.screenPosition = screenPosition;
                                 forwardFace.spriteLocation = findFaceSprite(right, left, up, down) + new Vector2(128, 0);
+                                forwardFace.depth = sortingOrder;
                                 faces.Add(forwardFace);
                             }
                             if (!up)
@@ -66,6 +103,7 @@ namespace BlockGame
                                 BlockFace upFace = new BlockFace();
                                 upFace.screenPosition = screenPosition;
                                 upFace.spriteLocation = findFaceSprite(right, left, back, forward) + new Vector2(64, 0);
+                                upFace.depth = sortingOrder;
                                 faces.Add(upFace);
                             }
                         }
