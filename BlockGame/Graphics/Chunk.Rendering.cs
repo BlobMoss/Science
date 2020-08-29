@@ -29,13 +29,12 @@ namespace BlockGame
 
                             float sortingOrder = screenPosition.Y - -z * 12;
 
-                            ///**
                             bool right = blocks[Math.Min(x + 1, (int)size.X - 1), y, z] > 0;
                             if (x + 1 > size.X - 1)
                             {
                                 if (chunkPosition.X + 1 < parent.chunks.GetLength(0))
                                 {
-                                    right = parent.chunks[(int)chunkPosition.X + 1, (int)chunkPosition.Y].GetBlock(0, y, z) > 0;
+                                    right = parent.GetBlock(x + 1,y,z) > 0;
                                 }
                                 else
                                 {
@@ -45,7 +44,7 @@ namespace BlockGame
                             bool left = blocks[Math.Max(x - 1, 0), y, z] > 0;
                             if (x - 1 < 0)
                             {
-                                if (chunkPosition.X - 1 > 0)
+                                if (chunkPosition.X - 1 >= 0)
                                 {
                                     left = parent.chunks[(int)chunkPosition.X - 1, (int)chunkPosition.Y].GetBlock((int)size.X - 1, y, z) > 0;
                                 }
@@ -69,7 +68,7 @@ namespace BlockGame
                             bool forward = blocks[x, Math.Max(y - 1, 0), z] > 0;
                             if (y - 1 < 0)
                             {
-                                if (chunkPosition.Y - 1 > 0)
+                                if (chunkPosition.Y - 1 >= 0)
                                 {
                                     forward = parent.chunks[(int)chunkPosition.X, (int)chunkPosition.Y - 1].GetBlock(x, (int)size.Y - 1, z) > 0;
                                 }
@@ -78,7 +77,7 @@ namespace BlockGame
                                     forward = false;
                                 }
                             }
-                            //**/
+
                             bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
                             bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
                             

@@ -11,7 +11,7 @@ namespace BlockGame
 {
     public partial class Chunk
     {
-        public static Vector3 size = new Vector3(16, 16, 16);
+        public static Vector3 size = new Vector3(16, 16, 32);
 
         World parent;
         public Vector2 chunkPosition;
@@ -46,14 +46,6 @@ namespace BlockGame
                 }
             }
         }
-        public byte GetBlock(int x,int y,int z)
-        {
-            return blocks[x, y, z];
-        }
-        public void SetBlock(int x, int y, int z,byte type)
-        {
-            blocks[x, y, z] = type;
-        }
         public void Update(GameTime gameTime)
         {
             if (UpdateNeeded)
@@ -71,6 +63,28 @@ namespace BlockGame
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
                 spriteBatch.Draw(BlockGame.blockTexture, face.screenPosition, rect, Color.White,0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / 1000000 );
             }
+        }
+        public byte GetBlock(int x, int y, int z)
+        {
+            if (InBounds(x, y, z))
+            {
+                return blocks[x, y, z];
+            }
+            return 0;
+        }
+        public void SetBlock(int x, int y, int z, byte type)
+        {
+            if (InBounds(x, y, z))
+            {
+                blocks[x, y, z] = type;
+            }
+        }
+        public bool InBounds(int x, int y, int z)
+        {
+            bool checkX = x < 0 || x >= size.X;
+            bool checkY = y < 0 || y >= size.Y;
+            bool checkZ = z < 0 || z >= size.Z;
+            return !(checkX || checkY || checkZ);
         }
     }
 }

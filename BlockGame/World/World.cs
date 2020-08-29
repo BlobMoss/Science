@@ -11,7 +11,6 @@ namespace BlockGame
     {
         public int length;
         public int width;
-        public int height;
         public Chunk[,] chunks;
 
         public World(int _length, int _width)
@@ -28,12 +27,6 @@ namespace BlockGame
                 }
             }
         }
-        /**
-        public byte GetBlock(int x, int y, int z)
-        {
-            
-        }
-        **/
         public void Update(GameTime gameTime)
         {
             for (int x = 0; x < chunks.GetLength(0); x++)
@@ -53,6 +46,27 @@ namespace BlockGame
                     chunks[x, y].Draw(spriteBatch, gameTime);
                 }
             }
+        }
+        public byte GetBlock(int x, int y, int z)
+        {
+            if (InBounds((int)(x / 16f), (int)(y / 16f)))
+            {
+                return chunks[(int)(x / 16f), (int)(y / 16f)].GetBlock(x % 16, y % 16, z % 16);
+            }
+            return 0;
+        }
+        public void SetBlock(int x, int y, int z, byte type)
+        {
+            if (InBounds((int)(x / 16f), (int)(y / 16f)))
+            {
+                chunks[(int)(x / 16f), (int)(y / 16f)].SetBlock(x % 16, y % 16, z % 16, type);
+            }
+        }
+        public bool InBounds(int x, int y)
+        {
+            bool checkX = x < 0 || x >= length;
+            bool checkY = y < 0 || y >= width;
+            return !(checkX || checkY);
         }
     }
 }
