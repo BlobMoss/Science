@@ -9,14 +9,11 @@ namespace BlockGame
 {
     class Camera
     {
-        public static readonly int renderDistance = 2;
+        public static readonly int renderDistance = 3;
         public static Vector3 worldPosition;
         public static Vector2 screenPosition()
         {
-            Vector2 pos = Vector2.Zero;
-            pos.X = worldPosition.X * 5f + -worldPosition.Y * 5f;
-            pos.Y = -worldPosition.X * 3f + -worldPosition.Y * 3f;
-            return pos;
+            return Utility.WorldToPixels(worldPosition);
         }
     }
 }

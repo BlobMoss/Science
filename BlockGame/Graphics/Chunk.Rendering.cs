@@ -22,10 +22,9 @@ namespace BlockGame
                     {
                         if (blocks[x, y, z] > 0)
                         {
-                            Vector2 screenPosition = Vector2.Zero;
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
-                            screenPosition.X =  (chunkPositionOffset.X + x) * 5 + -(chunkPositionOffset.Y + y) * 5 + 400;
-                            screenPosition.Y = -(chunkPositionOffset.X + x) * 3 + -(chunkPositionOffset.Y + y) * 3 + -z * 6 + 240;
+                            Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z);
+                            Vector2 screenPosition = Utility.WorldToPixels(worldPosition);
 
                             float sortingOrder = screenPosition.Y - -z * 12;
 
@@ -108,15 +107,6 @@ namespace BlockGame
                         }
                     }
                 }
-            }
-        }
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
-        {
-            for (int i = 0; i < faces.Count; i++)
-            {
-                BlockFace face = faces[i];
-                Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
-                spriteBatch.Draw(BlockGame.blockTexture, face.screenPosition - Camera.screenPosition(), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / -1000000);
             }
         }
         Vector2 findFaceSprite(bool right,bool left,bool up, bool down)

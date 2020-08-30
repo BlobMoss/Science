@@ -42,23 +42,19 @@ namespace BlockGame
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                Camera.worldPosition.X += 1;
-                Debug.WriteLine(Camera.screenPosition());
+                Camera.worldPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Camera.worldPosition.X -= 1;
-                Debug.WriteLine(Camera.screenPosition());
+                Camera.worldPosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                Camera.worldPosition.Y += 1;
-                Debug.WriteLine(Camera.screenPosition());
+                Camera.worldPosition.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                Camera.worldPosition.Y -= 1;
-                Debug.WriteLine(Camera.screenPosition());
+                Camera.worldPosition.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
             }
 
             for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
@@ -70,6 +66,10 @@ namespace BlockGame
                         if (chunks[x, y] != null)
                         {
                             chunks[x, y].Update(gameTime);
+                        }
+                        else
+                        {
+                            chunks[x, y] = new Chunk(this, new Vector2(x, y));
                         }
                     }
                 }
@@ -106,7 +106,10 @@ namespace BlockGame
         {
             if (InBounds((int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)))
             {
-                chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)].SetBlock(x % (int)Chunk.size.X, y % (int)Chunk.size.Y, z, type);
+                if (chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)] != null)
+                {
+                    chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)].SetBlock(x % (int)Chunk.size.X, y % (int)Chunk.size.Y, z,type);
+                }
             }
         }
         public bool InBounds(int x, int y)
