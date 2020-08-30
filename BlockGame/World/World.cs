@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,53 +14,99 @@ namespace BlockGame
         public int width;
         public Chunk[,] chunks;
 
+        public Vector3 Cameraposition;
+        public Vector3 spawnPosition;
+
         public World(int _length, int _width)
         {
             length = _length;
             width = _width;
 
+            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2,Chunk.size.Z);
+
+            GenerateWorld();
+        }
+        void GenerateWorld()
+        {
             chunks = new Chunk[length, width];
-            for (int x = 0; x < chunks.GetLength(0); x++)
+            for (int x = length / 2 - Camera.renderDistance; x < length / 2 + Camera.renderDistance; x++)
             {
-                for (int y = 0; y < chunks.GetLength(1); y++)
+                for (int y = width / 2 - Camera.renderDistance; y < width / 2 + Camera.renderDistance; y++)
                 {
-                    chunks[x, y] = new Chunk(this, new Vector2(x , y));
+                    chunks[x, y] = new Chunk(this, new Vector2(x, y));
                 }
             }
+            Camera.worldPosition = spawnPosition;
         }
         public void Update(GameTime gameTime)
         {
-            for (int x = 0; x < chunks.GetLength(0); x++)
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                for (int y = 0; y < chunks.GetLength(1); y++)
+                Camera.worldPosition.X += 1;
+                Debug.WriteLine(Camera.screenPosition());
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                Camera.worldPosition.X -= 1;
+                Debug.WriteLine(Camera.screenPosition());
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                Camera.worldPosition.Y += 1;
+                Debug.WriteLine(Camera.screenPosition());
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                Camera.worldPosition.Y -= 1;
+                Debug.WriteLine(Camera.screenPosition());
+            }
+
+            for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
+            {
+                for (int y = (int)(Camera.worldPosition.Y / Chunk.size.Y) - Camera.renderDistance; y < (int)(Camera.worldPosition.Y / Chunk.size.Y) + Camera.renderDistance; y++)
                 {
-                    chunks[x, y].Update(gameTime);
+                    if (InBounds(x, y))
+                    {
+                        if (chunks[x, y] != null)
+                        {
+                            chunks[x, y].Update(gameTime);
+                        }
+                    }
                 }
             }
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
-            for (int x = 0; x < chunks.GetLength(0); x++)
+            for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
             {
-                for (int y = chunks.GetLength(1) - 1; y >= 0; y--)
+                for (int y = (int)(Camera.worldPosition.Y / Chunk.size.Y) - Camera.renderDistance; y < (int)(Camera.worldPosition.Y / Chunk.size.Y) + Camera.renderDistance; y++)
                 {
-                    chunks[x, y].Draw(spriteBatch, gameTime);
+                    if (InBounds(x, y))
+                    {
+                        if (chunks[x, y] != null)
+                        {
+                            chunks[x, y].Draw(spriteBatch, gameTime);
+                        }
+                    }
                 }
             }
         }
         public byte GetBlock(int x, int y, int z)
         {
-            if (InBounds((int)(x / 16f), (int)(y / 16f)))
+            if (InBounds((int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)))
             {
-                return chunks[(int)(x / 16f), (int)(y / 16f)].GetBlock(x % 16, y % 16, z % 16);
+                if (chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)] != null)
+                {
+                    return chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)].GetBlock(x % (int)Chunk.size.X, y % (int)Chunk.size.Y, z);
+                }
             }
             return 0;
         }
         public void SetBlock(int x, int y, int z, byte type)
         {
-            if (InBounds((int)(x / 16f), (int)(y / 16f)))
+            if (InBounds((int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)))
             {
-                chunks[(int)(x / 16f), (int)(y / 16f)].SetBlock(x % 16, y % 16, z % 16, type);
+                chunks[(int)(x / Chunk.size.X), (int)(y / Chunk.size.Y)].SetBlock(x % (int)Chunk.size.X, y % (int)Chunk.size.Y, z, type);
             }
         }
         public bool InBounds(int x, int y)

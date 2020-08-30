@@ -11,7 +11,7 @@ namespace BlockGame
 {
     public partial class Chunk
     {
-        public static Vector3 size = new Vector3(16, 16, 32);
+        public static readonly Vector3 size = new Vector3(16, 16, 32);
 
         World parent;
         public Vector2 chunkPosition;
@@ -52,16 +52,7 @@ namespace BlockGame
             {
                 UpdateSides();
                 UpdateNeeded = false;
-                Debug.WriteLine("drew " + faces.Count + " faces");
-            }
-        }
-        public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
-        {
-            for (int i = faces.Count - 1; i >= 0; i--)
-            {
-                BlockFace face = faces[i];
-                Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
-                spriteBatch.Draw(BlockGame.blockTexture, face.screenPosition, rect, Color.White,0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / 1000000 );
+                Debug.WriteLine("created " + faces.Count + " faces");
             }
         }
         public byte GetBlock(int x, int y, int z)

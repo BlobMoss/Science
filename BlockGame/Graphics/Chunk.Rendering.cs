@@ -25,7 +25,7 @@ namespace BlockGame
                             Vector2 screenPosition = Vector2.Zero;
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
                             screenPosition.X =  (chunkPositionOffset.X + x) * 5 + -(chunkPositionOffset.Y + y) * 5 + 400;
-                            screenPosition.Y = -(chunkPositionOffset.X + x) * 3 + -(chunkPositionOffset.Y + y) * 3 + -z * 6 + 400;
+                            screenPosition.Y = -(chunkPositionOffset.X + x) * 3 + -(chunkPositionOffset.Y + y) * 3 + -z * 6 + 240;
 
                             float sortingOrder = screenPosition.Y - -z * 12;
 
@@ -34,7 +34,7 @@ namespace BlockGame
                             {
                                 if (chunkPosition.X + 1 < parent.chunks.GetLength(0))
                                 {
-                                    right = parent.GetBlock(x + 1,y,z) > 0;
+                                    right = parent.GetBlock((int)chunkPosition.X * 16 + x + 1, (int)chunkPosition.Y * 16 + y, z) > 0;
                                 }
                                 else
                                 {
@@ -46,7 +46,7 @@ namespace BlockGame
                             {
                                 if (chunkPosition.X - 1 >= 0)
                                 {
-                                    left = parent.chunks[(int)chunkPosition.X - 1, (int)chunkPosition.Y].GetBlock((int)size.X - 1, y, z) > 0;
+                                    left = parent.GetBlock((int)chunkPosition.X * 16 + x - 1, (int)chunkPosition.Y * 16 + y, z) > 0;
                                 }
                                 else
                                 {
@@ -58,7 +58,7 @@ namespace BlockGame
                             {
                                 if (chunkPosition.Y + 1 < parent.chunks.GetLength(1))
                                 {
-                                    back = parent.chunks[(int)chunkPosition.X, (int)chunkPosition.Y + 1].GetBlock(x, 0, z) > 0;
+                                    back = parent.GetBlock((int)chunkPosition.X * 16 + x, (int)chunkPosition.Y * 16 + y + 1, z) > 0;
                                 }
                                 else
                                 {
@@ -70,7 +70,7 @@ namespace BlockGame
                             {
                                 if (chunkPosition.Y - 1 >= 0)
                                 {
-                                    forward = parent.chunks[(int)chunkPosition.X, (int)chunkPosition.Y - 1].GetBlock(x, (int)size.Y - 1, z) > 0;
+                                    forward = parent.GetBlock((int)chunkPosition.X * 16 + x, (int)chunkPosition.Y * 16 + y - 1, z) > 0;
                                 }
                                 else
                                 {
@@ -108,6 +108,15 @@ namespace BlockGame
                         }
                     }
                 }
+            }
+        }
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            for (int i = 0; i < faces.Count; i++)
+            {
+                BlockFace face = faces[i];
+                Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
+                spriteBatch.Draw(BlockGame.blockTexture, face.screenPosition - Camera.screenPosition(), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / -1000000);
             }
         }
         Vector2 findFaceSprite(bool right,bool left,bool up, bool down)

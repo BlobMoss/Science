@@ -24,7 +24,7 @@ namespace BlockGame
         {
             base.Initialize();
 
-            world = new World(3, 3);
+            world = new World(16, 16);
         }
 
         protected override void LoadContent()
@@ -50,7 +50,7 @@ namespace BlockGame
         {
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack);
+            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
 
             world.Draw(_spriteBatch, gameTime);
 
