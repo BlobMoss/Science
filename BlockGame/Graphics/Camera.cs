@@ -13,7 +13,7 @@ namespace BlockGame
         public static Vector3 worldPosition;
         public static Vector2 screenPosition()
         {
-            return Utility.WorldToPixels(worldPosition);
+            return Utility.WorldToScreen(worldPosition);
         }
     }
 }

@@ -40,22 +40,25 @@ namespace BlockGame
         }
         public void Update(GameTime gameTime)
         {
+            Vector2 cameraMovement = Vector2.Zero;
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                Camera.worldPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
+                cameraMovement.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                Camera.worldPosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
+                cameraMovement.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                Camera.worldPosition.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
+                cameraMovement.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                Camera.worldPosition.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 4; 
+                cameraMovement.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
             }
+
+            Camera.worldPosition += Utility.ScreenToWorld(cameraMovement);
 
             for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
             {

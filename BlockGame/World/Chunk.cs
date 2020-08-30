@@ -52,7 +52,6 @@ namespace BlockGame
             {
                 UpdateSides();
                 UpdateNeeded = false;
-                Debug.WriteLine("created " + faces.Count + " faces");
             }
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
