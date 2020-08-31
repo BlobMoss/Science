@@ -77,7 +77,7 @@ namespace BlockGame
 
             GraphicsDevice.SetRenderTarget(null);
             batch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
-            batch.Draw(target, new Vector2(1,1), new Rectangle(1,1, ScreenData.windowWidth * 2, ScreenData.windowHeight * 2), Color.White);
+            batch.Draw(target, Vector2.Zero, new Rectangle(0,0, ScreenData.windowWidth * 2, ScreenData.windowHeight * 2), Color.White);
             batch.End();
 
             base.Draw(gameTime);

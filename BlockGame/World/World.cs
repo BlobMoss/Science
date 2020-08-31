@@ -43,22 +43,26 @@ namespace BlockGame
             Vector2 cameraMovement = Vector2.Zero;
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                cameraMovement.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
+                cameraMovement.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 3f;
+                cameraMovement.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 3f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                cameraMovement.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
+                cameraMovement.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 3f;
+                cameraMovement.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 3f;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                cameraMovement.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
+                cameraMovement.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 5f;
+                cameraMovement.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 5f; 
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                cameraMovement.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 16f; 
+                cameraMovement.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 5f;
+                cameraMovement.Y -= (float)gameTime.ElapsedGameTime.TotalSeconds * 5f; 
             }
 
-            Camera.worldPosition += Utility.ScreenToWorld(cameraMovement);
+            Camera.worldPosition += new Vector3(cameraMovement.X,cameraMovement.Y,0) * 0.75f;
 
             for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
             {

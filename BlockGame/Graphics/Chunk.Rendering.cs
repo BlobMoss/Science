@@ -26,7 +26,7 @@ namespace BlockGame
                             Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z);
                             Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
 
-                            float sortingOrder = screenPosition.Y - -z * 12;
+                            float sortingOrder = screenPosition.Y - -z * 12 + y * 0.01f;
 
                             bool right = blocks[Math.Min(x + 1, (int)size.X - 1), y, z] > 0;
                             if (x + 1 > size.X - 1)
