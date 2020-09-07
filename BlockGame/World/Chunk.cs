@@ -60,8 +60,8 @@ namespace BlockGame
             {
                 BlockFace face = faces[i];
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
-                Vector2 screenPosition = new Vector2(ScreenData.windowWidth, ScreenData.windowHeight) / (ScreenData.zoom * 2) + face.screenPosition - Camera.screenPosition() + new Vector2(0, 128);
-                spriteBatch.Draw(BlockGame.blockTexture, screenPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / -1000000);
+                Vector2 screenPosition = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize) + face.screenPosition - Camera.screenPosition() + new Vector2(0, 128);
+                spriteBatch.Draw(BlockGame.blockTexture, new Vector2((int)screenPosition.X,(int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / -1000000);
             }
         }
         public byte GetBlock(int x, int y, int z)

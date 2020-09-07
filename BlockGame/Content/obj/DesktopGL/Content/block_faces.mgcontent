@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Melvin/Documents/GitHub/Science/BlockGame/Content/block_faces.png</SourceFile>
-  <SourceTime>2020-08-31T12:01:56.1890222+02:00</SourceTime>
-  <DestFile>C:/Users/Melvin/Documents/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/block_faces.xnb</DestFile>
-  <DestTime>2020-08-31T12:04:28.9640843+02:00</DestTime>
+  <SourceFile>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block_faces.png</SourceFile>
+  <SourceTime>2020-08-28T16:31:04.1625307+02:00</SourceTime>
+  <DestFile>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/block_faces.xnb</DestFile>
+  <DestTime>2020-09-01T08:54:39.7261847+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -9,7 +9,13 @@ namespace BlockGame
 {
     class Camera
     {
+        public static int windowWidth;
+        public static int windowHeight;
+
+        public static int pixelSize = 3;
+
         public static readonly int renderDistance = 3;
+
         public static Vector3 worldPosition;
         public static Vector2 screenPosition()
         {

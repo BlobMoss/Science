@@ -11,9 +11,7 @@ namespace BlockGame
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteBatch renderTargetBatch;
-        private SpriteBatch batch;
         private RenderTarget2D renderTarget;
-        private RenderTarget2D target;
         
         World world;
 
@@ -32,10 +30,9 @@ namespace BlockGame
         protected override void Initialize()
         {
             world = new World(256, 256);
-            ScreenData.windowWidth = GraphicsDevice.Viewport.Width;
-            ScreenData.windowHeight = GraphicsDevice.Viewport.Height;
-            renderTarget = new RenderTarget2D(GraphicsDevice, ScreenData.windowWidth * 2, ScreenData.windowHeight * 2);
-            target = new RenderTarget2D(GraphicsDevice, ScreenData.windowWidth, ScreenData.windowHeight);
+            Camera.windowWidth = GraphicsDevice.Viewport.Width;
+            Camera.windowHeight = GraphicsDevice.Viewport.Height;
+            renderTarget = new RenderTarget2D(GraphicsDevice, Camera.windowWidth, Camera.windowHeight);
 
             base.Initialize();
         }
@@ -44,7 +41,6 @@ namespace BlockGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             renderTargetBatch = new SpriteBatch(GraphicsDevice);
-            batch = new SpriteBatch(GraphicsDevice);
 
             blockTexture = Content.Load<Texture2D>("block_faces");
         }
@@ -70,22 +66,17 @@ namespace BlockGame
             world.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 
-            GraphicsDevice.SetRenderTarget(target);
-            renderTargetBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
-            renderTargetBatch.Draw(renderTarget,Vector2.Zero, new Rectangle(0, 0, ScreenData.windowWidth * 2, ScreenData.windowHeight * 2), Color.White,0,Vector2.Zero,Vector2.One * ScreenData.zoom,SpriteEffects.None,1);
-            renderTargetBatch.End();
-
             GraphicsDevice.SetRenderTarget(null);
-            batch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
-            batch.Draw(target, Vector2.Zero, new Rectangle(0,0, ScreenData.windowWidth * 2, ScreenData.windowHeight * 2), Color.White);
-            batch.End();
+            renderTargetBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
+            renderTargetBatch.Draw(renderTarget,Vector2.Zero, new Rectangle(0, 0, Camera.windowWidth, Camera.windowHeight), Color.White,0,Vector2.Zero,Vector2.One * Camera.pixelSize,SpriteEffects.None,1);
+            renderTargetBatch.End();
 
             base.Draw(gameTime);
         }
         public void OnResize(Object sender, EventArgs e)
         {
-            ScreenData.windowWidth = GraphicsDevice.Viewport.Width;
-            ScreenData.windowHeight = GraphicsDevice.Viewport.Width;
+            Camera.windowWidth = GraphicsDevice.Viewport.Width;
+            Camera.windowHeight = GraphicsDevice.Viewport.Width;
         }
     }
 }
