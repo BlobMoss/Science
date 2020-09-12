@@ -61,15 +61,9 @@ namespace BlockGame
         {
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            GraphicsDevice.SetRenderTarget(renderTarget);
             _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
-
-            GraphicsDevice.SetRenderTarget(null);
-            renderTargetBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
-            renderTargetBatch.Draw(renderTarget,Vector2.Zero, new Rectangle(0, 0, Camera.windowWidth, Camera.windowHeight), Color.White,0,Vector2.Zero,Vector2.One * Camera.pixelSize,SpriteEffects.None,1);
-            renderTargetBatch.End();
 
             base.Draw(gameTime);
         }

@@ -14,13 +14,5 @@ namespace BlockGame
             screenPosition.Y = (int)(-worldPosition.X * 3 + -worldPosition.Y * 3 + worldPosition.Z * 6);
             return screenPosition;
         }
-        public static Vector3 ScreenToWorld(Vector2 screenPosition)
-        {
-            Vector3 worldPosition;
-            worldPosition.X = screenPosition.X / 5f - -screenPosition.Y / 5f;
-            worldPosition.Y = -screenPosition.X / 3f - -screenPosition.Y / 3f;
-            worldPosition.Z = 0;
-            return worldPosition;
-        }
     }
 }
