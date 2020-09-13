@@ -37,7 +37,7 @@ namespace BlockGame
                                 }
                                 else
                                 {
-                                    right = false;
+                                    right = true;
                                 }
                             }
                             bool left = blocks[Math.Max(x - 1, 0), y, z] > 0;

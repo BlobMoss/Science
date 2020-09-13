@@ -28,7 +28,7 @@ namespace BlockGame
             {
                 for (int y = 0; y < size.Y - 0; y++)
                 {
-                    for (int z = 0; z < NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32 + 8; z++)
+                    for (int z = 0; z < NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32 + 16; z++)
                     {
                         blocks[x, y, z] = 1;
                     }
@@ -50,7 +50,7 @@ namespace BlockGame
             {
                 BlockFace face = faces[i];
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
-                Vector2 screenPosition = new Vector2(Camera.windowWidth, Camera.windowHeight) / 2 + face.screenPosition - Camera.screenPosition() + new Vector2(0, 128);
+                Vector2 screenPosition = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize) + face.screenPosition - Camera.screenPosition() + new Vector2(0, 128);
                 spriteBatch.Draw(BlockGame.blockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth / -1000000);
             }
         }

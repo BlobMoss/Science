@@ -10,8 +10,7 @@ namespace BlockGame
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private SpriteBatch renderTargetBatch;
-        private RenderTarget2D renderTarget;
+        private RenderTarget2D nativeRenderTarget;
         
         World world;
 
@@ -32,7 +31,8 @@ namespace BlockGame
             world = new World(256, 256);
             Camera.windowWidth = GraphicsDevice.Viewport.Width;
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
-            renderTarget = new RenderTarget2D(GraphicsDevice, Camera.windowWidth, Camera.windowHeight);
+
+            nativeRenderTarget = new RenderTarget2D(GraphicsDevice, Camera.windowWidth, Camera.windowHeight);
 
             base.Initialize();
         }
@@ -40,7 +40,6 @@ namespace BlockGame
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            renderTargetBatch = new SpriteBatch(GraphicsDevice);
 
             blockTexture = Content.Load<Texture2D>("block_faces");
         }
@@ -59,10 +58,18 @@ namespace BlockGame
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.SetRenderTarget(nativeRenderTarget);
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
             _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
+            _spriteBatch.End();
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            Rectangle rect = new Rectangle(0, 0, Camera.windowWidth, Camera.windowHeight);
+            _spriteBatch.Draw(nativeRenderTarget,Vector2.Zero, rect, Color.White,0,Vector2.Zero,Vector2.One * Camera.pixelSize,SpriteEffects.None,0);
             _spriteBatch.End();
 
             base.Draw(gameTime);

@@ -62,7 +62,7 @@ namespace BlockGame
                 cameraMovement.Y -= 5f; 
             }
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-             Camera.worldPosition += new Vector3(cameraMovement.X,cameraMovement.Y,0) * delta * 0.75f;
+             Camera.worldPosition += new Vector3(cameraMovement.X,cameraMovement.Y,0) * delta * 1f;
 
             for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
             {
