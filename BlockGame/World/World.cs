@@ -77,6 +77,23 @@ namespace BlockGame
                         else
                         {
                             chunks[x, y] = new Chunk(this, new Vector2(x, y));
+
+                            if (chunks[x + 1, y] != null)
+                            {
+                                chunks[x + 1, y].UpdateNeeded = true;
+                            }
+                            if (chunks[x - 1, y] != null)
+                            {
+                                chunks[x - 1, y].UpdateNeeded = true;
+                            }
+                            if (chunks[x, y + 1] != null)
+                            {
+                                chunks[x, y + 1].UpdateNeeded = true;
+                            }
+                            if (chunks[x, y - 1] != null)
+                            {
+                                chunks[x, y - 1].UpdateNeeded = true;
+                            }
                         }
                     }
                 }
@@ -93,22 +110,6 @@ namespace BlockGame
                         if (chunks[x, y] != null)
                         {
                             chunks[x, y].Draw(spriteBatch, gameTime);
-                            if (chunks[x + 1,y] != null)
-                            {
-                                chunks[x + 1, y].UpdateNeeded = true;
-                            }
-                            if (chunks[x - 1, y] != null)
-                            {
-                                chunks[x - 1, y].UpdateNeeded = true;
-                            }
-                            if (chunks[x, y + 1] != null)
-                            {
-                                chunks[x, y + 1].UpdateNeeded = true;
-                            }
-                            if (chunks[x, y - 1] != null)
-                            {
-                                chunks[x, y - 1].UpdateNeeded = true;
-                            }
                         }
                     }
                 }

@@ -1,6 +1,7 @@
 ﻿using BlockGame.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 
 namespace BlockGame
@@ -28,7 +29,7 @@ namespace BlockGame
             {
                 for (int y = 0; y < size.Y - 0; y++)
                 {
-                    for (int z = 0; z < NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32 + 16; z++)
+                    for (int z = 0; z < Math.Clamp(NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32 + 16,0,size.Z - 1); z++)
                     {
                         blocks[x, y, z] = 1;
                     }
