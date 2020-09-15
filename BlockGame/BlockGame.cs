@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 namespace BlockGame
 {
@@ -15,6 +16,8 @@ namespace BlockGame
         World world;
 
         public static Texture2D blockTexture;
+
+        bool pressed;
 
         public BlockGame()
         {
@@ -49,6 +52,47 @@ namespace BlockGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 Exit();
+            }
+
+            Vector2 cameraMovement = Vector2.Zero;
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                cameraMovement.X += 3f;
+                cameraMovement.Y -= 3f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                cameraMovement.X -= 3f;
+                cameraMovement.Y += 3f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                cameraMovement.X += 5f;
+                cameraMovement.Y += 5f;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                cameraMovement.X -= 5f;
+                cameraMovement.Y -= 5f;
+            }
+            cameraMovement.X *= Camera.rotation.X;
+            cameraMovement.Y *= Camera.rotation.Y;
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            Camera.worldPosition += new Vector3(cameraMovement.X, cameraMovement.Y, 0) * delta * 1f;
+
+            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            {
+                if (!pressed)
+                {
+                    pressed = true;
+                    Camera.RotateRight();
+                    world.ReloadChunks();
+                    Debug.WriteLine("CAMERA" + Camera.screenPosition());
+                }
+            }
+            else
+            {
+                pressed = false;
             }
 
             world.Update(gameTime);

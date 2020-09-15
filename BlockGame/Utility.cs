@@ -12,6 +12,8 @@ namespace BlockGame
             Vector2 screenPosition;
             screenPosition.X = (int)(worldPosition.X * 5 + -worldPosition.Y * 5);
             screenPosition.Y = (int)(-worldPosition.X * 3 + -worldPosition.Y * 3 + worldPosition.Z * 6);
+            screenPosition.X *= Camera.rotation.X;
+            screenPosition.Y *= Camera.rotation.Y;
             return screenPosition;
         }
     }

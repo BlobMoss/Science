@@ -38,32 +38,21 @@ namespace BlockGame
             }
             Camera.worldPosition = spawnPosition;
         }
+        public void ReloadChunks()
+        {
+            for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
+            {
+                for (int y = (int)(Camera.worldPosition.Y / Chunk.size.Y) - Camera.renderDistance; y < (int)(Camera.worldPosition.Y / Chunk.size.Y) + Camera.renderDistance; y++)
+                {
+                    if (InBounds(x, y))
+                    {
+                        chunks[x, y].UpdateNeeded = true;
+                    }
+                }
+            }
+        }
         public void Update(GameTime gameTime)
         {
-            Vector2 cameraMovement = Vector2.Zero;
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                cameraMovement.X += 3f;
-                cameraMovement.Y -= 3f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                cameraMovement.X -= 3f;
-                cameraMovement.Y += 3f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                cameraMovement.X += 5f;
-                cameraMovement.Y += 5f; 
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                cameraMovement.X -= 5f;
-                cameraMovement.Y -= 5f; 
-            }
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-             Camera.worldPosition += new Vector3(cameraMovement.X,cameraMovement.Y,0) * delta * 1f;
-
             for (int x = (int)(Camera.worldPosition.X / Chunk.size.X) - Camera.renderDistance; x < (int)(Camera.worldPosition.X / Chunk.size.X) + Camera.renderDistance; x++)
             {
                 for (int y = (int)(Camera.worldPosition.Y / Chunk.size.Y) - Camera.renderDistance; y < (int)(Camera.worldPosition.Y / Chunk.size.Y) + Camera.renderDistance; y++)
