@@ -87,7 +87,6 @@ namespace BlockGame
                     pressed = true;
                     Camera.RotateRight();
                     world.ReloadChunks();
-                    Debug.WriteLine("CAMERA" + Camera.screenPosition());
                 }
             }
             else
@@ -105,7 +104,14 @@ namespace BlockGame
             GraphicsDevice.SetRenderTarget(nativeRenderTarget);
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
+            if (Camera.rotation.Y == 1)
+            {
+                _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
+            }
+            else
+            {
+                _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
+            }
             world.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 

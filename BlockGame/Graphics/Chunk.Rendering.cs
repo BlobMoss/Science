@@ -26,7 +26,7 @@ namespace BlockGame
                             Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z * Camera.rotation.Y);
                             Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
 
-                            float sortingOrder = screenPosition.Y - -z * 12 * Camera.rotation.Y + y * 0.01f;
+                            float sortingOrder = screenPosition.Y - -z * 12 + y * 0.01f;
 
                             bool right = blocks[Math.Min(x + 1, (int)size.X - 1), y, z] > 0;
                             if (x + 1 > size.X - 1)
@@ -79,7 +79,20 @@ namespace BlockGame
 
                             bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
                             bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
-                            
+
+                            if (Camera.rotation.X == -1)
+                            {
+                                bool r = right;
+                                right = left;
+                                left = r;
+                            }
+                            if (Camera.rotation.Y == -1)
+                            {
+                                bool f = forward;
+                                forward = back;
+                                back = f;
+                            }
+
                             if (!left)
                             {
                                 BlockFace leftFace = new BlockFace();
