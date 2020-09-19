@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
+using System.IO.MemoryMappedFiles;
 
 namespace BlockGame
 {
@@ -23,75 +24,20 @@ namespace BlockGame
                         if (blocks[x, y, z] > 0)
                         {
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
-                            Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z * Camera.rotation.Y);
+                            Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z);
                             Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
 
-                            float sortingOrder = screenPosition.Y - -z * 12 + y * 0.01f;
+                            Vector2 o = Camera.Orientate(new Vector2(0, 1));
+                            float depth = o.X * -worldPosition.X + o.Y * worldPosition.Y;
+                            float height = -z * 2;
+                            float sortingOrder = depth + height;
 
-                            bool right = blocks[Math.Min(x + 1, (int)size.X - 1), y, z] > 0;
-                            if (x + 1 > size.X - 1)
-                            {
-                                if (chunkPosition.X + 1 < parent.chunks.GetLength(0))
-                                {
-                                    right = parent.GetBlock((int)chunkPosition.X * 16 + x + 1, (int)chunkPosition.Y * 16 + y, z) > 0;
-                                }
-                                else
-                                {
-                                    right = true;
-                                }
-                            }
-                            bool left = blocks[Math.Max(x - 1, 0), y, z] > 0;
-                            if (x - 1 < 0)
-                            {
-                                if (chunkPosition.X - 1 >= 0)
-                                {
-                                    left = parent.GetBlock((int)chunkPosition.X * 16 + x - 1, (int)chunkPosition.Y * 16 + y, z) > 0;
-                                }
-                                else
-                                {
-                                    left = false;
-                                }
-                            }
-                            bool back = blocks[x, Math.Min(y + 1, (int)size.Y - 1), z] > 0;
-                            if (y + 1 > size.Y - 1)
-                            {
-                                if (chunkPosition.Y + 1 < parent.chunks.GetLength(1))
-                                {
-                                    back = parent.GetBlock((int)chunkPosition.X * 16 + x, (int)chunkPosition.Y * 16 + y + 1, z) > 0;
-                                }
-                                else
-                                {
-                                    back = false;
-                                }
-                            }
-                            bool forward = blocks[x, Math.Max(y - 1, 0), z] > 0;
-                            if (y - 1 < 0)
-                            {
-                                if (chunkPosition.Y - 1 >= 0)
-                                {
-                                    forward = parent.GetBlock((int)chunkPosition.X * 16 + x, (int)chunkPosition.Y * 16 + y - 1, z) > 0;
-                                }
-                                else
-                                {
-                                    forward = false;
-                                }
-                            }
-
+                            bool right = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(1, 0)));
+                            bool left = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(-1, 0)));
+                            bool back = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, 1)));
+                            bool forward = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, -1)));
                             bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
                             bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
-
-                            if (Camera.rotation.X == -1)
-                            {
-                                bool r = right;
-                                right = left;
-                                left = r;
-                            }
-                            if (Camera.rotation.Y == -1)
-                            {
-                                bool f = forward;
-                                forward = back;
-                                back = f;
-                            }
 
                             if (!left)
                             {
@@ -121,6 +67,31 @@ namespace BlockGame
                     }
                 }
             }
+        }
+        bool CheckSide(Vector3 pos, Vector2 direction)
+        {
+            if (Camera.orientation == 1 || Camera.orientation == 3)
+            {
+                direction = -direction;
+            }
+            pos.X += direction.X;
+            pos.Y += direction.Y;
+            bool isBlock = false;
+
+            if (pos.X > size.X - 1 || pos.X < 0 || pos.Y > size.Y - 1 || pos.Y < 0)
+            {
+                //may need attention
+                if (parent.InWorldBounds((int)(chunkPosition.X + direction.X), (int)(chunkPosition.Y + direction.Y)))
+                {
+                    isBlock = parent.GetBlock((int)(chunkPosition.X * size.X + pos.X), (int)(chunkPosition.Y * size.Y + pos.Y), (int)pos.Z) > 0;
+                }
+            }
+            else
+            {
+                isBlock = blocks[(int)Math.Clamp(pos.X, 0, size.X - 1), (int)Math.Clamp(pos.Y, 0, size.Y - 1), (int)pos.Z] > 0;
+            }
+
+            return isBlock;
         }
         Vector2 findFaceSprite(bool right,bool left,bool up, bool down)
         {

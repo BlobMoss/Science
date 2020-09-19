@@ -22,6 +22,8 @@ namespace BlockGame
         public BlockGame()
         {
             _graphics = new GraphicsDeviceManager(this);
+            _graphics.PreferredBackBufferHeight = 540;
+            _graphics.PreferredBackBufferWidth = 960;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
 
@@ -36,6 +38,12 @@ namespace BlockGame
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
 
             nativeRenderTarget = new RenderTarget2D(GraphicsDevice, Camera.windowWidth, Camera.windowHeight);
+            Vector2 unrotated = new Vector2(1, 0);
+            for (int i = 0; i < 4; i++)
+            {
+                unrotated = new Vector2(unrotated.Y, -unrotated.X);
+                Debug.WriteLine(unrotated);
+            }
 
             base.Initialize();
         }
@@ -75,18 +83,24 @@ namespace BlockGame
                 cameraMovement.X -= 5f;
                 cameraMovement.Y -= 5f;
             }
-            cameraMovement.X *= Camera.rotation.X;
-            cameraMovement.Y *= Camera.rotation.Y;
+            cameraMovement = Camera.Orientate(cameraMovement);
             float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             Camera.worldPosition += new Vector3(cameraMovement.X, cameraMovement.Y, 0) * delta * 1f;
 
-            if (Keyboard.GetState().IsKeyDown(Keys.E))
+            if (Keyboard.GetState().IsKeyDown(Keys.E) || Keyboard.GetState().IsKeyDown(Keys.Q))
             {
                 if (!pressed)
                 {
+                    if (Keyboard.GetState().IsKeyDown(Keys.E))
+                    {
+                        Camera.RotateClockwise();
+                    }
+                    else
+                    {
+                        Camera.RotateCounterclockwise();
+                    }
                     pressed = true;
-                    Camera.RotateRight();
-                    world.ReloadChunks();
+                    world.reloadNeeded = true;
                 }
             }
             else
@@ -104,14 +118,7 @@ namespace BlockGame
             GraphicsDevice.SetRenderTarget(nativeRenderTarget);
             GraphicsDevice.Clear(new Color(60, 159, 156, 1));
 
-            if (Camera.rotation.Y == 1)
-            {
-                _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
-            }
-            else
-            {
-                _spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, null, SamplerState.PointClamp);
-            }
+            _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 
@@ -127,7 +134,7 @@ namespace BlockGame
         public void OnResize(Object sender, EventArgs e)
         {
             Camera.windowWidth = GraphicsDevice.Viewport.Width;
-            Camera.windowHeight = GraphicsDevice.Viewport.Width;
+            Camera.windowHeight = GraphicsDevice.Viewport.Height;
         }
     }
 }
