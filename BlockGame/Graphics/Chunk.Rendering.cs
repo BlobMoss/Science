@@ -29,7 +29,7 @@ namespace BlockGame
 
                             Vector2 o = Camera.Orientate(new Vector2(0, 1));
                             float depth = o.X * -worldPosition.X + o.Y * worldPosition.Y;
-                            float height = -z * 2;
+                            float height = -z * 2 ;
                             float sortingOrder = depth + height;
 
                             bool right = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(1, 0)));

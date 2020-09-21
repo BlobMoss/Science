@@ -38,12 +38,6 @@ namespace BlockGame
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
 
             nativeRenderTarget = new RenderTarget2D(GraphicsDevice, Camera.windowWidth, Camera.windowHeight);
-            Vector2 unrotated = new Vector2(1, 0);
-            for (int i = 0; i < 4; i++)
-            {
-                unrotated = new Vector2(unrotated.Y, -unrotated.X);
-                Debug.WriteLine(unrotated);
-            }
 
             base.Initialize();
         }
