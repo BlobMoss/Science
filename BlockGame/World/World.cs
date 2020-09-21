@@ -31,13 +31,7 @@ namespace BlockGame
         void GenerateWorld()
         {
             chunks = new Chunk[length, width];
-            for (int x = length / 2 - Camera.renderDistance; x < length / 2 + Camera.renderDistance; x++)
-            {
-                for (int y = width / 2 - Camera.renderDistance; y < width / 2 + Camera.renderDistance; y++)
-                {
-                    chunks[x, y] = new Chunk(this, new Vector2(x, y));
-                }
-            }
+            
             Camera.worldPosition = spawnPosition;
         }
         public void Update(GameTime gameTime)
@@ -47,38 +41,26 @@ namespace BlockGame
             {
                 for (int y = (int)center.Y - Camera.renderDistance; y < (int)center.Y + Camera.renderDistance; y++)
                 {
-                    if (InWorldBounds(x, y))
+                    if (reloadNeeded)
                     {
-                        if (Math.Abs(x - center.X) + Math.Abs(y - center.Y) < Camera.renderDistance)
+                        if (chunks[x, y] != null)
+                        {
+                            chunks[x, y].UpdateNeeded = true;
+                        }
+                    }
+                    if (Math.Abs(x - center.X) + Math.Abs(y - center.Y) < Camera.renderDistance)
+                    {
+                        if (InWorldBounds(x, y))
                         {
                             if (chunks[x, y] != null)
                             {
-                                if (reloadNeeded)
-                                {
-                                    chunks[x, y].UpdateNeeded = true;
-                                }
                                 chunks[x, y].Update(gameTime);
                             }
                             else
                             {
                                 chunks[x, y] = new Chunk(this, new Vector2(x, y));
 
-                                if (chunks[x + 1, y] != null)
-                                {
-                                    chunks[x + 1, y].UpdateNeeded = true;
-                                }
-                                if (chunks[x - 1, y] != null)
-                                {
-                                    chunks[x - 1, y].UpdateNeeded = true;
-                                }
-                                if (chunks[x, y + 1] != null)
-                                {
-                                    chunks[x, y + 1].UpdateNeeded = true;
-                                }
-                                if (chunks[x, y - 1] != null)
-                                {
-                                    chunks[x, y - 1].UpdateNeeded = true;
-                                }
+                                UpdateAdjecentChunks(x,y);
                             }
                         }
                     }
@@ -103,6 +85,37 @@ namespace BlockGame
                             }
                         }
                     }
+                }
+            }
+        }
+        public void UpdateAdjecentChunks(int x, int y)
+        {
+            if (InWorldBounds(x + 1, y))
+            {
+                if (chunks[x + 1, y] != null)
+                {
+                    chunks[x + 1, y].UpdateNeeded = true;
+                }
+            }
+            if (InWorldBounds(x - 1, y))
+            {
+                if (chunks[x - 1, y] != null)
+                {
+                    chunks[x - 1, y].UpdateNeeded = true;
+                }
+            }
+            if (InWorldBounds(x, y + 1))
+            {
+                if (chunks[x, y + 1] != null)
+                {
+                    chunks[x, y + 1].UpdateNeeded = true;
+                }
+            }
+            if (InWorldBounds(x, y - 1))
+            {
+                if (chunks[x, y - 1] != null)
+                {
+                    chunks[x, y - 1].UpdateNeeded = true;
                 }
             }
         }
