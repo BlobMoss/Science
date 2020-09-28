@@ -15,8 +15,6 @@ namespace BlockGame
 
         public Vector3 spawnPosition;
 
-        public bool reloadNeeded;
-
         public World(int _length, int _width, Player _player)
         {
             length = _length;
@@ -33,6 +31,19 @@ namespace BlockGame
             
             player.position = spawnPosition;
         }
+        public void ReloadWorld()
+        {
+            for (int x = 0; x < length - 1; x++)
+            {
+                for (int y = 0; y < width - 1; y++)
+                {
+                    if (chunks[x, y] != null)
+                    {
+                        chunks[x, y].UpdateNeeded = true;
+                    }
+                }
+            }
+        }
         public void Update(GameTime gameTime)
         {
             player.Update(gameTime);
@@ -42,13 +53,6 @@ namespace BlockGame
             {
                 for (int y = (int)center.Y - Camera.renderDistance; y < (int)center.Y + Camera.renderDistance; y++)
                 {
-                    if (reloadNeeded)
-                    {
-                        if (chunks[x, y] != null)
-                        {
-                            chunks[x, y].UpdateNeeded = true;
-                        }
-                    }
                     if (Math.Abs(x - center.X) + Math.Abs(y - center.Y) < Camera.renderDistance)
                     {
                         if (InWorldBounds(x, y))
@@ -67,7 +71,6 @@ namespace BlockGame
                     }
                 }
             }
-            reloadNeeded = false;
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {

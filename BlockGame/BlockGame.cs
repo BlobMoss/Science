@@ -76,7 +76,7 @@ namespace BlockGame
                         Camera.RotateCounterclockwise();
                     }
                     pressed = true;
-                    world.reloadNeeded = true;
+                    world.ReloadWorld();
                 }
             }
             else

@@ -67,7 +67,7 @@ namespace BlockGame
         }
         public void SetBlock(int x, int y, int z, byte type)
         {
-            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE
+            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE OF CHUNK
             if (InBounds(x, y, z))
             {
                 blocks[x, y, z] = type;
