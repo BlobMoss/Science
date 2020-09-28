@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 
 namespace BlockGame
 {
@@ -14,17 +11,19 @@ namespace BlockGame
         public int width;
         public Chunk[,] chunks;
 
-        public Vector3 Cameraposition;
+        public Player player;
+
         public Vector3 spawnPosition;
 
         public bool reloadNeeded;
 
-        public World(int _length, int _width)
+        public World(int _length, int _width, Player _player)
         {
             length = _length;
             width = _width;
+            player = _player;
 
-            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, 0);
+            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, -8);
 
             GenerateWorld();
         }
@@ -32,10 +31,12 @@ namespace BlockGame
         {
             chunks = new Chunk[length, width];
             
-            Camera.worldPosition = spawnPosition;
+            player.position = spawnPosition;
         }
         public void Update(GameTime gameTime)
         {
+            player.Update(gameTime);
+
             Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
             for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
             {
@@ -70,6 +71,8 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
+            player.Draw(spriteBatch, gameTime);
+
             Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
             for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
             {

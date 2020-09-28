@@ -9,11 +9,15 @@ namespace BlockGame
 {
     public class BlockGame : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
-        private RenderTarget2D nativeRenderTarget;
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
+        RenderTarget2D nativeRenderTarget;
         
         World world;
+        Player player;
+
+        SimpleFps fps = new SimpleFps();
+        SpriteFont font;
 
         public static Texture2D blockTexture;
 
@@ -33,7 +37,9 @@ namespace BlockGame
 
         protected override void Initialize()
         {
-            world = new World(256, 256);
+            player = new Player();
+            world = new World(256, 256,player);
+            Camera.player = player;
             Camera.windowWidth = GraphicsDevice.Viewport.Width;
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
 
@@ -47,6 +53,7 @@ namespace BlockGame
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             blockTexture = Content.Load<Texture2D>("block_faces");
+            font = Content.Load<SpriteFont>("File");
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,31 +62,6 @@ namespace BlockGame
             {
                 Exit();
             }
-
-            Vector2 cameraMovement = Vector2.Zero;
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                cameraMovement.X += 3f;
-                cameraMovement.Y -= 3f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                cameraMovement.X -= 3f;
-                cameraMovement.Y += 3f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                cameraMovement.X += 5f;
-                cameraMovement.Y += 5f;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                cameraMovement.X -= 5f;
-                cameraMovement.Y -= 5f;
-            }
-            cameraMovement = Camera.Orientate(cameraMovement);
-            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Camera.worldPosition += new Vector3(cameraMovement.X, cameraMovement.Y, 0) * delta * 1f;
 
             if (Keyboard.GetState().IsKeyDown(Keys.E) || Keyboard.GetState().IsKeyDown(Keys.Q))
             {
@@ -103,6 +85,8 @@ namespace BlockGame
             }
 
             world.Update(gameTime);
+            Camera.Update(gameTime);
+            fps.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -121,6 +105,8 @@ namespace BlockGame
             _spriteBatch.Begin(samplerState: SamplerState.PointClamp);
             Rectangle rect = new Rectangle(0, 0, Camera.windowWidth, Camera.windowHeight);
             _spriteBatch.Draw(nativeRenderTarget,Vector2.Zero, rect, Color.White,0,Vector2.Zero,Vector2.One * Camera.pixelSize,SpriteEffects.None,0);
+
+            fps.DrawFps(_spriteBatch, font, new Vector2(10f, 10f), Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);

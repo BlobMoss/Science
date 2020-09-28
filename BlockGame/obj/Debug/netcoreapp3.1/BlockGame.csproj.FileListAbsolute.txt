@@ -48,3 +48,4 @@ C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\Block
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.genruntimeconfig.cache
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
+C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\File.xnb

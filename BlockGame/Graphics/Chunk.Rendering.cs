@@ -23,6 +23,17 @@ namespace BlockGame
                     {
                         if (blocks[x, y, z] > 0)
                         {
+                            bool left = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(-1, 0)));
+                            bool forward = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, -1)));
+                            bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
+                            if (left && forward && up)
+                            {
+                                continue; //wasting power if all sides are covered
+                            }
+                            bool right = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(1, 0)));
+                            bool back = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, 1)));
+                            bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
+                            
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
                             Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z);
                             Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
@@ -30,20 +41,15 @@ namespace BlockGame
                             Vector2 o = Camera.Orientate(new Vector2(0, 1));
                             float depth = o.X * -worldPosition.X + o.Y * worldPosition.Y;
                             float height = -z * 2 ;
-                            float sortingOrder = depth + height;
-
-                            bool right = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(1, 0)));
-                            bool left = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(-1, 0)));
-                            bool back = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, 1)));
-                            bool forward = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, -1)));
-                            bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
-                            bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
+                            float offset = y * 0.01f;
+                            float sortingOrder = depth + height + offset + 500000;
+                            sortingOrder /= 1000000;
 
                             if (!left)
                             {
                                 BlockFace leftFace = new BlockFace();
                                 leftFace.screenPosition = screenPosition;
-                                leftFace.spriteLocation = findFaceSprite(back, forward, up, down);
+                                leftFace.spriteLocation = FindFaceSprite(back, forward, up, down);
                                 leftFace.depth = sortingOrder;
                                 faces.Add(leftFace);
                             }
@@ -51,7 +57,7 @@ namespace BlockGame
                             {
                                 BlockFace forwardFace = new BlockFace();
                                 forwardFace.screenPosition = screenPosition;
-                                forwardFace.spriteLocation = findFaceSprite(right, left, up, down) + new Vector2(128, 0);
+                                forwardFace.spriteLocation = FindFaceSprite(right, left, up, down) + new Vector2(128, 0);
                                 forwardFace.depth = sortingOrder;
                                 faces.Add(forwardFace);
                             }
@@ -59,7 +65,7 @@ namespace BlockGame
                             {
                                 BlockFace upFace = new BlockFace();
                                 upFace.screenPosition = screenPosition;
-                                upFace.spriteLocation = findFaceSprite(right, left, back, forward) + new Vector2(64, 0);
+                                upFace.spriteLocation = FindFaceSprite(right, left, back, forward) + new Vector2(64, 0);
                                 upFace.depth = sortingOrder;
                                 faces.Add(upFace);
                             }
@@ -80,7 +86,6 @@ namespace BlockGame
 
             if (pos.X > size.X - 1 || pos.X < 0 || pos.Y > size.Y - 1 || pos.Y < 0)
             {
-                //may need attention
                 if (parent.InWorldBounds((int)(chunkPosition.X + direction.X), (int)(chunkPosition.Y + direction.Y)))
                 {
                     isBlock = parent.GetBlock((int)(chunkPosition.X * size.X + pos.X), (int)(chunkPosition.Y * size.Y + pos.Y), (int)pos.Z) > 0;
@@ -93,7 +98,7 @@ namespace BlockGame
 
             return isBlock;
         }
-        Vector2 findFaceSprite(bool right,bool left,bool up, bool down)
+        Vector2 FindFaceSprite(bool right,bool left,bool up, bool down)
         {
             if (right)
             {

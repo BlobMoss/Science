@@ -11,13 +11,22 @@ namespace BlockGame
     {
         public static int windowWidth;
         public static int windowHeight;
-        public static int pixelSize = 2;
-        public static int renderDistance = 6;
+        public static int pixelSize = 4;
+        public static int renderDistance = 5;
 
-        public static int orientation = 0;
+        public static int orientation;
 
+        public static Player player;
         public static Vector3 worldPosition;
-        public static Vector2 screenPosition()
+
+        public static void Update(GameTime gametime)
+        {
+            if (player != null)
+            {
+                worldPosition = player.position;
+            }
+        }
+        public static Vector2 ScreenPosition()
         {
             return Utility.WorldToScreen(worldPosition);
         }

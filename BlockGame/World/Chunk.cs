@@ -30,7 +30,7 @@ namespace BlockGame
             {
                 for (int y = 0; y < size.Y - 0; y++)
                 {
-                    for (int z = 0; z < Math.Clamp(NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32,0,size.Z - 1); z++)
+                    for (int z = 0; z < Math.Clamp(NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 16f, (int)(y + chunkPosition.Y * 16) / 16f) * -32 + 8,0,size.Z - 1); z++)
                     {
                         blocks[x, y, z] = 1;
                     }
@@ -53,8 +53,8 @@ namespace BlockGame
                 BlockFace face = faces[i];
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
                 Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-                Vector2 screenPosition = center + face.screenPosition - Camera.screenPosition();
-                spriteBatch.Draw(BlockGame.blockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, (500000f + face.depth) / 1000000f);
+                Vector2 screenPosition = center + face.screenPosition - Camera.ScreenPosition();
+                spriteBatch.Draw(BlockGame.blockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth);
             }
         }
         public byte GetBlock(int x, int y, int z)
