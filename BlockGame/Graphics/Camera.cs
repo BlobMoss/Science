@@ -11,7 +11,7 @@ namespace BlockGame
     {
         public static int windowWidth;
         public static int windowHeight;
-        public static int pixelSize = 4;
+        public static int pixelSize = 2;
         public static int renderDistance = 5;
 
         public static int orientation;

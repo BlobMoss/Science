@@ -30,7 +30,7 @@ namespace BlockGame
             {
                 for (int y = 0; y < size.Y - 0; y++)
                 {
-                    for (int z = 0; z < Math.Clamp(NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 16f, (int)(y + chunkPosition.Y * 16) / 16f) * -32 + 8,0,size.Z - 1); z++)
+                    for (int z = 0; z < Math.Clamp(NoiseGenerator.Noise((int)(x + chunkPosition.X * 16) / 8f, (int)(y + chunkPosition.Y * 16) / 8f) * -32 + 8,0,size.Z - 1); z++)
                     {
                         blocks[x, y, z] = 1;
                     }
@@ -67,6 +67,7 @@ namespace BlockGame
         }
         public void SetBlock(int x, int y, int z, byte type)
         {
+            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE
             if (InBounds(x, y, z))
             {
                 blocks[x, y, z] = type;
