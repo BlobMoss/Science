@@ -48,13 +48,12 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            for (int i = 0; i < faces.Count; i++)
+            foreach (BlockFace face in faces)
             {
-                BlockFace face = faces[i];
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
                 Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-                Vector2 screenPosition = center + face.screenPosition - Camera.ScreenPosition();
-                spriteBatch.Draw(BlockGame.blockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth);
+                Vector2 screenPosition = center + face.screenPosition + new Vector2(-8,0) - Camera.ScreenPosition();
+                spriteBatch.Draw(BlockGame.testBlockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth);
             }
         }
         public byte GetBlock(int x, int y, int z)
@@ -67,7 +66,7 @@ namespace BlockGame
         }
         public void SetBlock(int x, int y, int z, byte type)
         {
-            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE OF CHUNK
+            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE OF CHUNK 
             if (InBounds(x, y, z))
             {
                 blocks[x, y, z] = type;
