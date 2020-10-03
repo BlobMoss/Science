@@ -49,5 +49,3 @@ C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\Block
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\File.xnb
-C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\baby_booper.xnb
-C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\cowman.xnb

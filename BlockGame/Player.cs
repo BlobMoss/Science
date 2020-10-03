@@ -1,22 +1,18 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Diagnostics;
 
 namespace BlockGame
 {
     public class Player : Entity
     {
-        public Player(World _world)
-        {
-            world = _world;
-            position = world.spawnPosition;
-            SetCollisionPoints(new Vector3(1, 1, 1));
-        }
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             move(gameTime);
+        }
+        public override void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+
         }
         void move(GameTime gameTime)
         {
@@ -41,17 +37,13 @@ namespace BlockGame
                 movement.X -= 5f;
                 movement.Y -= 5f;
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                velocity.Z = 10;
-            }
-            
             movement = Camera.Orientate(movement);
+            float delta = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (Camera.orientation == 1 || Camera.orientation == 3)
             {
                 movement = -movement;
             }
-            velocity = new Vector3(movement.X, movement.Y, velocity.Z) * 1f;
+            position += new Vector3(movement.X, movement.Y, 0) * delta * 1f;
         }
     }
 }

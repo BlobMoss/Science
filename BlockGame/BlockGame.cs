@@ -19,8 +19,7 @@ namespace BlockGame
         SimpleFps fps = new SimpleFps();
         SpriteFont font;
 
-        public static Texture2D testBlockTexture;
-        public static Texture2D testPlayer;
+        public static Texture2D blockTexture;
 
         bool pressed;
 
@@ -38,8 +37,8 @@ namespace BlockGame
 
         protected override void Initialize()
         {
-            world = new World(256, 256, player);
-            player = new Player(world);
+            player = new Player();
+            world = new World(256, 256,player);
             Camera.player = player;
             Camera.windowWidth = GraphicsDevice.Viewport.Width;
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
@@ -53,8 +52,7 @@ namespace BlockGame
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            testBlockTexture = Content.Load<Texture2D>("block_faces");
-            testPlayer = Content.Load<Texture2D>("baby_booper");
+            blockTexture = Content.Load<Texture2D>("block_faces");
             font = Content.Load<SpriteFont>("File");
         }
 
@@ -87,7 +85,6 @@ namespace BlockGame
             }
 
             world.Update(gameTime);
-            player.Update(gameTime);
             Camera.Update(gameTime);
             fps.Update(gameTime);
 
@@ -101,7 +98,6 @@ namespace BlockGame
 
             _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
-            player.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);

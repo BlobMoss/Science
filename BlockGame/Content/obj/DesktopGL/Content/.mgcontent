@@ -4,13 +4,11 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/baby_booper.png</File>
     <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block.png</File>
     <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block_faces.png</File>
     <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/File.spritefont</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

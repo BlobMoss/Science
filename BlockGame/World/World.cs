@@ -21,13 +21,15 @@ namespace BlockGame
             width = _width;
             player = _player;
 
-            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, 16);
+            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, -8);
 
             GenerateWorld();
         }
         void GenerateWorld()
         {
             chunks = new Chunk[length, width];
+            
+            player.position = spawnPosition;
         }
         public void ReloadWorld()
         {
@@ -44,6 +46,8 @@ namespace BlockGame
         }
         public void Update(GameTime gameTime)
         {
+            player.Update(gameTime);
+
             Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
             for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
             {
@@ -70,6 +74,8 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
+            player.Draw(spriteBatch, gameTime);
+
             Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
             for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
             {

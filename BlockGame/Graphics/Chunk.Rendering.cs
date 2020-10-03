@@ -28,18 +28,19 @@ namespace BlockGame
                             bool up = blocks[x, y, Math.Min(z + 1, (int)size.Z - 1)] > 0;
                             if (left && forward && up)
                             {
-                                continue;
+                                continue; //wasting power if all sides are covered
                             }
                             bool right = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(1, 0)));
                             bool back = CheckSide(new Vector3(x, y, z), Camera.Orientate(new Vector2(0, 1)));
                             bool down = blocks[x, y, Math.Max(z - 1, 0)] > 0;
                             
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
-                            Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, z);
+                            Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, -z);
                             Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
 
-                            float depth = -screenPosition.Y;
-                            float height = -z * 12;
+                            Vector2 o = Camera.Orientate(new Vector2(0, 1));
+                            float depth = o.X * -worldPosition.X + o.Y * worldPosition.Y;
+                            float height = -z * 2 ;
                             float offset = y * 0.01f;
                             float sortingOrder = depth + height + offset + 500000;
                             sortingOrder /= 1000000;
