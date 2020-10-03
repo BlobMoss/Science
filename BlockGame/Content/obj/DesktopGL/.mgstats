@@ -1,2 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/block.xnb","TextureProcessor","Texture2DContent",285,1109,0.3010698
+"C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/block_faces.png","C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/bin/DesktopGL/block_faces.xnb","TextureProcessor","Texture2DContent",1106,49237,0.1590253
+"C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/font.spritefont","C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/bin/DesktopGL/font.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21521,0.2330534
+"C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/player.png","C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/bin/DesktopGL/player.xnb","TextureProcessor","Texture2DContent",232,1109,0.0030011

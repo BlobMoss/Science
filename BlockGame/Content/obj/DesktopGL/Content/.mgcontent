@@ -4,9 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block.png</File>
-    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block_faces.png</File>
-    <File>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/File.spritefont</File>
+    <File>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/block_faces.png</File>
+    <File>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/font.spritefont</File>
+    <File>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/player.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

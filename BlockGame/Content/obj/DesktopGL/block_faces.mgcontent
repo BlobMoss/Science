@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/block_faces.png</SourceFile>
   <SourceTime>2020-10-02T19:53:56.9085568+02:00</SourceTime>
-  <DestFile>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/bin/DesktopGL/Content/block_faces.xnb</DestFile>
-  <DestTime>2020-10-03T11:10:16.8288694+02:00</DestTime>
+  <DestFile>C:/Users/melvi/Programming/Games/BACKUPS/BlockGame/Content/bin/DesktopGL/block_faces.xnb</DestFile>
+  <DestTime>2020-10-03T11:42:14.3356175+02:00</DestTime>
   <Importer>TextureImporter</Importer>
-  <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
+  <ImporterTime>2018-12-08T17:35:54+01:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
-  <ProcessorTime>2020-08-10T16:17:54+02:00</ProcessorTime>
+  <ProcessorTime>2018-12-08T17:35:54+01:00</ProcessorTime>
   <Parameters>
     <Key>ColorKeyColor</Key>
     <Value>255,0,255,255</Value>

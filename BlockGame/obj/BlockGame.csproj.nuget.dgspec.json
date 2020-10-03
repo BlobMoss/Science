@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\BlockGame.csproj": {}
+    "C:\\Users\\melvi\\Programming\\Games\\BACKUPS\\BlockGame\\BlockGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\BlockGame.csproj": {
+    "C:\\Users\\melvi\\Programming\\Games\\BACKUPS\\BlockGame\\BlockGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\BlockGame.csproj",
+        "projectUniqueName": "C:\\Users\\melvi\\Programming\\Games\\BACKUPS\\BlockGame\\BlockGame.csproj",
         "projectName": "BlockGame",
-        "projectPath": "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\BlockGame.csproj",
+        "projectPath": "C:\\Users\\melvi\\Programming\\Games\\BACKUPS\\BlockGame\\BlockGame.csproj",
         "packagesPath": "C:\\Users\\melvi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\melvi\\OneDrive\\Dokument\\GitHub\\Science\\BlockGame\\obj\\",
+        "outputPath": "C:\\Users\\melvi\\Programming\\Games\\BACKUPS\\BlockGame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

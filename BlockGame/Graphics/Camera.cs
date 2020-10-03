@@ -23,7 +23,7 @@ namespace BlockGame
         {
             if (player != null)
             {
-                worldPosition = player.position;
+                worldPosition = new Vector3(player.position.X,player.position.Y, 8);
             }
         }
         public static Vector2 ScreenPosition()
