@@ -21,6 +21,7 @@ namespace BlockGame
 
         public static Texture2D testBlockTexture;
         public static Texture2D testPlayer;
+        public static Texture2D testShadow;
 
         bool pressed;
 
@@ -55,6 +56,7 @@ namespace BlockGame
 
             testBlockTexture = Content.Load<Texture2D>("block_faces");
             testPlayer = Content.Load<Texture2D>("player");
+            testShadow = Content.Load<Texture2D>("shadow_small");
             font = Content.Load<SpriteFont>("font");
         }
 

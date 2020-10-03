@@ -21,7 +21,6 @@ C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.dll
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.pdb
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.genruntimeconfig.cache
-C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block.xnb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block.xnb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\BlockGame.exe
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\BlockGame.deps.json
@@ -48,8 +47,6 @@ C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\Block
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.genruntimeconfig.cache
 C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
 C:\Users\Melvin\Documents\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
-C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\File.xnb
-C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\baby_booper.xnb
 C:\Users\melvi\Programming\Games\BACKUPS\Science - Copy\BlockGame\bin\Debug\netcoreapp3.1\BlockGame.exe
 C:\Users\melvi\Programming\Games\BACKUPS\Science - Copy\BlockGame\bin\Debug\netcoreapp3.1\Content\block_faces.xnb
 C:\Users\melvi\Programming\Games\BACKUPS\Science - Copy\BlockGame\bin\Debug\netcoreapp3.1\Content\File.xnb
@@ -101,3 +98,6 @@ C:\Users\melvi\Programming\Games\BACKUPS\BlockGame\obj\Debug\netcoreapp3.1\Block
 C:\Users\melvi\Programming\Games\BACKUPS\BlockGame\obj\Debug\netcoreapp3.1\BlockGame.genruntimeconfig.cache
 C:\Users\melvi\Programming\Games\BACKUPS\BlockGame\bin\Debug\netcoreapp3.1\Content\font.xnb
 C:\Users\melvi\Programming\Games\BACKUPS\BlockGame\bin\Debug\netcoreapp3.1\Content\player.xnb
+C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\font.xnb
+C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\player.xnb
+C:\Users\melvi\OneDrive\Dokument\GitHub\Science\BlockGame\bin\Debug\netcoreapp3.1\Content\shadow_small.xnb

@@ -21,10 +21,10 @@ namespace BlockGame
             width = _width;
             player = _player;
 
-            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, 16);
+            spawnPosition = new Vector3(length * Chunk.size.X / 2,width * Chunk.size.Y / 2, 32);
 
             GenerateWorld();
-        }
+        } 
         void GenerateWorld()
         {
             chunks = new Chunk[length, width];

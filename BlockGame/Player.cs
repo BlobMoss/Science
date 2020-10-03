@@ -17,9 +17,9 @@ namespace BlockGame
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            move(gameTime);
+            Move(gameTime);
         }
-        void move(GameTime gameTime)
+        void Move(GameTime gameTime)
         {
             Vector2 movement = Vector2.Zero;
             if (Keyboard.GetState().IsKeyDown(Keys.D))
