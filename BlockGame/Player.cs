@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 using System.Diagnostics;
 
 namespace BlockGame
@@ -8,14 +9,27 @@ namespace BlockGame
     public class Player : Entity
     {
         float movementSpeed = 7.0f;
-        public Player(World _world)
+        bool clicked;
+        public Player()
         {
-            world = _world;
-            position = world.spawnPosition;
+            position = World.instance.spawnPosition;
             SetCollisionPoints(new Vector3(1, 1, 1.5f));
         }
         public override void Update(GameTime gameTime)
         {
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                if (!clicked)
+                {
+                    Vector3 blockPosition = Utility.ScreenToBlock(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
+                    World.instance.SetBlock((int)blockPosition.X, (int)blockPosition.Y, (int)blockPosition.Z, 0);
+                    clicked = true;
+                }
+            }
+            else
+            {
+                clicked = false;
+            }
             base.Update(gameTime);
             Move(gameTime);
         }

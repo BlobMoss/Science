@@ -40,7 +40,7 @@ namespace BlockGame
 
                             float depth = -screenPosition.Y;
                             float height = -z * 12;
-                            float offset = y * 0.01f;
+                            float offset = x * 0.01f;
                             float sortingOrder = depth + height + offset + 500000;
                             sortingOrder /= 1000000;
 

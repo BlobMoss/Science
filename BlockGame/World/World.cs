@@ -15,8 +15,12 @@ namespace BlockGame
 
         public Vector3 spawnPosition;
 
+        public static World instance;
+
         public World(int _length, int _width, Player _player)
         {
+            instance = this;
+
             length = _length;
             width = _width;
             player = _player;

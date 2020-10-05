@@ -22,6 +22,7 @@ namespace BlockGame
         public static Texture2D testBlockTexture;
         public static Texture2D testPlayer;
         public static Texture2D testShadow;
+        public static Texture2D testCursor;
 
         bool pressed;
 
@@ -40,7 +41,7 @@ namespace BlockGame
         protected override void Initialize()
         {
             world = new World(256, 256, player);
-            player = new Player(world);
+            player = new Player();
             Camera.player = player;
             Camera.windowWidth = GraphicsDevice.Viewport.Width;
             Camera.windowHeight = GraphicsDevice.Viewport.Height;
@@ -56,6 +57,7 @@ namespace BlockGame
 
             testBlockTexture = Content.Load<Texture2D>("block_faces");
             testPlayer = Content.Load<Texture2D>("player");
+            testCursor = Content.Load<Texture2D>("cursor");
             testShadow = Content.Load<Texture2D>("shadow_small");
             font = Content.Load<SpriteFont>("font");
         }
@@ -90,6 +92,7 @@ namespace BlockGame
 
             world.Update(gameTime);
             player.Update(gameTime);
+            Cursor.Update(gameTime);
             Camera.Update(gameTime);
             fps.Update(gameTime);
 
@@ -104,6 +107,7 @@ namespace BlockGame
             _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
             player.Draw(_spriteBatch, gameTime);
+            Cursor.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);

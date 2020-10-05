@@ -66,10 +66,12 @@ namespace BlockGame
         }
         public void SetBlock(int x, int y, int z, byte type)
         {
-            //UPDATE NEIGHBORS IF SET BLOCK ON EDGE OF CHUNK 
+            //UPDATE NEIGHBOR IF SET BLOCK ON THAT EDGE OF CHUNK 
             if (InBounds(x, y, z))
             {
                 blocks[x, y, z] = type;
+                UpdateNeeded = true;
+                parent.UpdateAdjecentChunks((int)chunkPosition.X, (int)chunkPosition.Y);
             }
         }
         public bool InBounds(int x, int y, int z)

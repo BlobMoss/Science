@@ -7,8 +7,6 @@ namespace BlockGame
 {
     public class Entity
     {
-        public World world;
-
         public float gravity = 32;
         public float drag = 0;
 
@@ -39,15 +37,15 @@ namespace BlockGame
                 float y = point.Y + position.Y;
                 float z = point.Z + position.Z;
 
-                if (world.GetBlock((int)Math.Round(x + velocity.X * delta), (int)Math.Round(y), (int)Math.Round(z)) > 0)
+                if (World.instance.GetBlock((int)Math.Round(x + velocity.X * delta), (int)Math.Round(y), (int)Math.Round(z)) > 0)
                 {
                     velocity.X = 0;
                 }
-                if (world.GetBlock((int)Math.Round(x), (int)Math.Round(y + velocity.Y * delta), (int)Math.Round(z)) > 0)
+                if (World.instance.GetBlock((int)Math.Round(x), (int)Math.Round(y + velocity.Y * delta), (int)Math.Round(z)) > 0)
                 {
                     velocity.Y = 0;
                 }
-                if (world.GetBlock((int)Math.Round(x), (int)Math.Round(y), (int)Math.Round(z + velocity.Z * delta)) > 0)
+                if (World.instance.GetBlock((int)Math.Round(x), (int)Math.Round(y), (int)Math.Round(z + velocity.Z * delta)) > 0)
                 {
                     if (velocity.Z < 0)
                     {
@@ -90,7 +88,7 @@ namespace BlockGame
 
             for (int i = (int)position.Z; i >= 0; i--)
             {
-                if (world.GetBlock((int)Math.Round(position.X), (int)Math.Round(position.Y),i) > 0)
+                if (World.instance.GetBlock((int)Math.Round(position.X), (int)Math.Round(position.Y),i) > 0)
                 {
                     Vector3 shadowPosition = new Vector3(position.X,position.Y,i);
                     Vector2 shadowScreenPosition = Utility.WorldToScreen(shadowPosition);
