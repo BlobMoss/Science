@@ -107,7 +107,7 @@ namespace BlockGame
             _spriteBatch.Begin(sortMode: SpriteSortMode.BackToFront, null, SamplerState.PointClamp);
             world.Draw(_spriteBatch, gameTime);
             player.Draw(_spriteBatch, gameTime);
-            Cursor.Draw(_spriteBatch, gameTime);
+            //Cursor.Draw(_spriteBatch, gameTime);
             _spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);

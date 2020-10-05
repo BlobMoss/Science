@@ -75,30 +75,21 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Vector2 screenPosition = Utility.WorldToScreen(position);
-
-            float sortingOrder = -screenPosition.Y - position.Z * 12;  
-            sortingOrder += 500000;
-            sortingOrder /= 1000000;
-
             Rectangle rect = new Rectangle(0, 0, 16, 16);
-            Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-            Vector2 drawPosition = center + screenPosition + new Vector2(-8, -3) - Camera.ScreenPosition();
+            Vector2 drawPosition = Utility.WorldToScreen(position).Item1;
+            float sortingOrder = Utility.WorldToScreen(position).Item2;
+            drawPosition.Y -= 3;
             spriteBatch.Draw(BlockGame.testPlayer, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
 
             for (int i = (int)position.Z; i >= 0; i--)
             {
                 if (World.instance.GetBlock((int)Math.Round(position.X), (int)Math.Round(position.Y),i) > 0)
                 {
-                    Vector3 shadowPosition = new Vector3(position.X,position.Y,i);
-                    Vector2 shadowScreenPosition = Utility.WorldToScreen(shadowPosition);
-
-                    float shadowSortingOrder = -shadowScreenPosition.Y - shadowPosition.Z * 12 - 3;
-                    shadowSortingOrder += 500000;
-                    shadowSortingOrder /= 1000000;
-
-                    Vector2 shadowDrawPosition = center + shadowScreenPosition + new Vector2(-8, -3) - Camera.ScreenPosition();
-                    spriteBatch.Draw(BlockGame.testShadow, shadowDrawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, shadowSortingOrder);
+                    Vector3 shadowPosition = new Vector3(position.X, position.Y, i + 1);
+                    Rectangle shadowRect = new Rectangle(0, 0, 16, 16);
+                    Vector2 shadowDrawPosition = Utility.WorldToScreen(shadowPosition).Item1;
+                    float shadowSortingOrder = Utility.WorldToScreen(shadowPosition).Item2;
+                    spriteBatch.Draw(BlockGame.testShadow, shadowDrawPosition, shadowRect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, shadowSortingOrder);
                     break;
                 }
             }

@@ -36,7 +36,7 @@ namespace BlockGame
                             
                             Vector2 chunkPositionOffset = new Vector2(chunkPosition.X * size.X, chunkPosition.Y * size.Y);
                             Vector3 worldPosition = new Vector3(chunkPositionOffset.X + x, chunkPositionOffset.Y + y, z);
-                            Vector2 screenPosition = Utility.WorldToScreen(worldPosition);
+                            Vector2 screenPosition = Utility.WorldToPixels(worldPosition);
 
                             float depth = -screenPosition.Y;
                             float height = -z * 12;

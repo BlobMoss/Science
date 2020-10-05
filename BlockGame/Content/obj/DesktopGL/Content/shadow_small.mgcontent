@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/shadow_small.png</SourceFile>
-  <SourceTime>2020-10-03T20:39:39.131872+02:00</SourceTime>
+  <SourceTime>2020-10-05T16:34:08.3908594+02:00</SourceTime>
   <DestFile>C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/shadow_small.xnb</DestFile>
-  <DestTime>2020-10-03T21:34:07.2522107+02:00</DestTime>
+  <DestTime>2020-10-05T16:34:14.429055+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

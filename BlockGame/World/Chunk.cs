@@ -52,7 +52,7 @@ namespace BlockGame
             {
                 Rectangle rect = new Rectangle((int)face.spriteLocation.X, (int)face.spriteLocation.Y, 16, 16);
                 Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-                Vector2 screenPosition = center + face.screenPosition + new Vector2(-8,0) - Camera.ScreenPosition();
+                Vector2 screenPosition = center + face.screenPosition + new Vector2(-8,0) - Camera.PixelPosition();
                 spriteBatch.Draw(BlockGame.testBlockTexture, new Vector2((int)screenPosition.X, (int)screenPosition.Y), rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, face.depth);
             }
         }

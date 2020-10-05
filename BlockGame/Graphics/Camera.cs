@@ -27,9 +27,9 @@ namespace BlockGame
                 worldPosition = new Vector3(player.position.X,player.position.Y, 8);
             }
         }
-        public static Vector2 ScreenPosition()
+        public static Vector2 PixelPosition()
         {
-            return Utility.WorldToScreen(worldPosition);
+            return Utility.WorldToPixels(worldPosition);
         }
         public static void RotateClockwise()
         {
