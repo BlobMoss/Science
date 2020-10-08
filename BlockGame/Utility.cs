@@ -41,9 +41,14 @@ namespace BlockGame
             worldPosition.X = (screenPosition.X / 5 + screenPosition.Y / -3) / 2;
             worldPosition.Y = (screenPosition.X / -5 + screenPosition.Y / -3) / 2;
 
-            for (int i = (int)Chunk.size.Z; i >= 0; i--)
+            for (int i = (int)Chunk.size.Z; i >= -1; i--)
             {
-                Vector3 blockPosition = new Vector3((int)worldPosition.X - i, (int)worldPosition.Y - i, i);
+                Vector3 blockPosition = new Vector3((int)worldPosition.X - i, (int)worldPosition.Y - i, i + 2);
+                if (World.instance.GetBlock((int)blockPosition.X, (int)blockPosition.Y, (int)blockPosition.Z) > 0)
+                {
+                    return blockPosition;
+                }
+                blockPosition.Z--;
                 if (World.instance.GetBlock((int)blockPosition.X, (int)blockPosition.Y, (int)blockPosition.Z) > 0)
                 {
                     return blockPosition;
