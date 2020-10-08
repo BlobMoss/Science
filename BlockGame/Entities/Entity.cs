@@ -75,21 +75,30 @@ namespace BlockGame
         }
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
-            Rectangle rect = new Rectangle(0, 0, 16, 16);
-            Vector2 drawPosition = Utility.WorldToScreen(position).Item1;
-            float sortingOrder = Utility.WorldToScreen(position).Item2;
+            (Vector2, float) renderData = Utility.WorldToScreen(position);
+            Vector2 drawPosition = renderData.Item1;
+            float sortingOrder = renderData.Item2;
             drawPosition.Y -= 3;
+
+            Rectangle rect = new Rectangle(0, 0, 16, 16);
             spriteBatch.Draw(BlockGame.testPlayer, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
 
+            drawShadow(spriteBatch);
+        }
+        void drawShadow(SpriteBatch spriteBatch)
+        {
             for (int i = (int)position.Z; i >= 0; i--)
             {
-                if (World.instance.GetBlock((int)Math.Round(position.X), (int)Math.Round(position.Y),i) > 0)
+                if (World.instance.GetBlock((int)Math.Round(position.X), (int)Math.Round(position.Y), i) > 0)
                 {
                     Vector3 shadowPosition = new Vector3(position.X, position.Y, i + 1);
-                    Rectangle shadowRect = new Rectangle(0, 0, 16, 16);
-                    Vector2 shadowDrawPosition = Utility.WorldToScreen(shadowPosition).Item1;
-                    float shadowSortingOrder = Utility.WorldToScreen(shadowPosition).Item2;
-                    spriteBatch.Draw(BlockGame.testShadow, shadowDrawPosition, shadowRect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, shadowSortingOrder);
+                    (Vector2, float) renderData = Utility.WorldToScreen(shadowPosition);
+                    Vector2 drawPosition = renderData.Item1;
+                    float sortingOrder = renderData.Item2;
+
+                    Rectangle rect = new Rectangle(0, 0, 16, 16);
+                    spriteBatch.Draw(BlockGame.testShadow, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
+
                     break;
                 }
             }

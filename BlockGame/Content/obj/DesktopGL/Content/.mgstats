@@ -1,6 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 "C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/block_faces.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/block_faces.xnb","TextureProcessor","Texture2DContent",1106,49237,0.1898473
-"C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/cursor.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/cursor.xnb","TextureProcessor","Texture2DContent",185,3157,0.1805871
+"C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/cursor.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/cursor.xnb","TextureProcessor","Texture2DContent",182,3157,0.1753358
 "C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/font.spritefont","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/font.xnb","FontDescriptionProcessor","SpriteFontContent",2008,21538,0.1581082
 "C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/player.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/player.xnb","TextureProcessor","Texture2DContent",232,1109,0.0032316
 "C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/shadow_small.png","C:/Users/melvi/OneDrive/Dokument/GitHub/Science/BlockGame/Content/bin/DesktopGL/Content/shadow_small.xnb","TextureProcessor","Texture2DContent",127,1109,0.1815048

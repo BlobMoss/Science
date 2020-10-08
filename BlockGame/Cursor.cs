@@ -15,15 +15,16 @@ namespace BlockGame
         public static void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
             Vector3 position = Utility.ScreenToBlock(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
-            Vector2 screenPosition = Utility.WorldToPixels(position);
-
-            float sortingOrder = -screenPosition.Y - position.Z * 12;
-            sortingOrder += 500000;
-            sortingOrder /= 1000000;
+            (Vector2, float) renderData = Utility.WorldToScreen(position);
+            Vector2 drawPosition = renderData.Item1;
+            float sortingOrder = renderData.Item2;
+            sortingOrder -= 0.000001f;
 
             Rectangle rect = new Rectangle(0, 0, 16, 16);
-            Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-            Vector2 drawPosition = center + screenPosition - Camera.PixelPosition();
+            spriteBatch.Draw(BlockGame.testCursor, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
+            rect = new Rectangle(16, 0, 16, 16);
+            spriteBatch.Draw(BlockGame.testCursor, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
+            rect = new Rectangle(32, 0, 16, 16);
             spriteBatch.Draw(BlockGame.testCursor, drawPosition, rect, Color.White, 0, Vector2.Zero, Vector2.One, SpriteEffects.None, sortingOrder);
         }
     }
