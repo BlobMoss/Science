@@ -8,14 +8,14 @@ namespace BlockGame
 {
     class Cursor
     {
+        public static Vector3 worldPosition;
         public static void Update(GameTime gameTime)
         {
-
+            worldPosition = Utility.ScreenToBlock(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
         }
         public static void Draw(SpriteBatch spriteBatch,GameTime gameTime)
         {
-            Vector3 position = Utility.ScreenToBlock(new Vector2(Mouse.GetState().Position.X, Mouse.GetState().Position.Y));
-            (Vector2, float) renderData = Utility.WorldToScreen(position);
+            (Vector2, float) renderData = Utility.WorldToScreen(worldPosition);
             Vector2 drawPosition = renderData.Item1;
             float sortingOrder = renderData.Item2;
             sortingOrder -= 0.000001f;

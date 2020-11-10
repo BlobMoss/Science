@@ -12,7 +12,7 @@ namespace BlockGame
         bool clicked;
         public Player()
         {
-            position = World.instance.spawnPosition;
+            position = World.instance.spawnPosition; 
             SetCollisionPoints(new Vector3(1, 1, 1.5f));
         }
         public override void Update(GameTime gameTime)

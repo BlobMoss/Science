@@ -5,7 +5,7 @@ using System;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Text;
-using System.IO.MemoryMappedFiles;
+using System.Linq;
 
 namespace BlockGame
 {
@@ -40,38 +40,33 @@ namespace BlockGame
 
                             float depth = -screenPosition.Y;
                             float height = -z * 12;
-                            float offset = y * 0.01f;
+                            float offset = y * 0.1f;
                             float sortingOrder = depth + offset + height + 500000;
                             sortingOrder /= 1000000;
 
                             if (!left)
                             {
-                                BlockFace leftFace = new BlockFace();
-                                leftFace.screenPosition = screenPosition;
-                                leftFace.spriteLocation = FindFaceSprite(back, forward, up, down);
-                                leftFace.depth = sortingOrder;
-                                faces.Add(leftFace);
+                                Vector2 spriteLocation = FindFaceSprite(back, forward, up, down);
+                                BlockFace face = new BlockFace(spriteLocation, screenPosition, worldPosition,sortingOrder);
+                                faces.Add(face);
                             }
                             if (!forward)
                             {
-                                BlockFace forwardFace = new BlockFace();
-                                forwardFace.screenPosition = screenPosition;
-                                forwardFace.spriteLocation = FindFaceSprite(right, left, up, down) + new Vector2(128, 0);
-                                forwardFace.depth = sortingOrder;
-                                faces.Add(forwardFace);
+                                Vector2 spriteLocation = FindFaceSprite(right, left, up, down) + new Vector2(128, 0);
+                                BlockFace face = new BlockFace(spriteLocation, screenPosition, worldPosition, sortingOrder);
+                                faces.Add(face);
                             }
                             if (!up)
                             {
-                                BlockFace upFace = new BlockFace();
-                                upFace.screenPosition = screenPosition;
-                                upFace.spriteLocation = FindFaceSprite(right, left, back, forward) + new Vector2(64, 0);
-                                upFace.depth = sortingOrder;
-                                faces.Add(upFace);
+                                Vector2 spriteLocation = FindFaceSprite(right, left, back, forward) + new Vector2(64, 0);
+                                BlockFace face = new BlockFace(spriteLocation, screenPosition, worldPosition, sortingOrder);
+                                faces.Add(face);
                             }
                         }
                     }
                 }
             }
+            faces = faces.OrderBy(o => o.depth).ToList();
         }
         bool CheckSide(Vector3 pos, Vector2 direction)
         {

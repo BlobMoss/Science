@@ -1,7 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace BlockGame
 {
@@ -10,6 +12,7 @@ namespace BlockGame
         public int length;
         public int width;
         public Chunk[,] chunks;
+        public List<Chunk> renderedChunks = new List<Chunk>();
 
         public Player player;
 
@@ -48,6 +51,7 @@ namespace BlockGame
         }
         public void Update(GameTime gameTime)
         {
+            renderedChunks.Clear();
             Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
             for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
             {
@@ -59,37 +63,28 @@ namespace BlockGame
                         {
                             if (chunks[x, y] != null)
                             {
-                                chunks[x, y].Update(gameTime);
+                                renderedChunks.Add(chunks[x, y]);
                             }
                             else
                             {
                                 chunks[x, y] = new Chunk(this, new Vector2(x, y));
 
-                                UpdateAdjecentChunks(x,y);
+                                UpdateAdjecentChunks(x, y);
                             }
                         }
                     }
                 }
             }
-        }
-        public void Draw(SpriteBatch spriteBatch,GameTime gameTime)
-        {
-            Vector2 center = new Vector2(Camera.worldPosition.X / Chunk.size.X, Camera.worldPosition.Y / Chunk.size.Y);
-            for (int x = (int)center.X - Camera.renderDistance; x < (int)center.X + Camera.renderDistance; x++)
+            for (int i = 0; i < renderedChunks.Count; i++)
             {
-                for (int y = (int)center.Y - Camera.renderDistance; y < (int)center.Y + Camera.renderDistance; y++)
-                {
-                    if (Math.Abs(x - center.X) + Math.Abs(y - center.Y) < Camera.renderDistance)
-                    {
-                        if (InWorldBounds(x, y))
-                        {
-                            if (chunks[x, y] != null)
-                            {
-                                chunks[x, y].Draw(spriteBatch, gameTime);
-                            }
-                        }
-                    }
-                }
+                renderedChunks[i].Update(gameTime);
+            }
+        }
+        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        {
+            for (int i = 0; i < renderedChunks.Count; i++)
+            {
+                renderedChunks[i].Draw(spriteBatch, gameTime);
             }
         }
         public void UpdateAdjecentChunks(int x, int y)

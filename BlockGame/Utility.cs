@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BlockGame.Graphics;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -34,27 +35,26 @@ namespace BlockGame
         public static Vector3 ScreenToBlock(Vector2 screenPosition)
         {
             screenPosition /= Camera.pixelSize;
-            screenPosition -= new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
-            screenPosition += Camera.PixelPosition();
 
-            Vector3 worldPosition = Vector3.Zero;
-            worldPosition.X = (screenPosition.X / 5 + screenPosition.Y / -3) / 2;
-            worldPosition.Y = (screenPosition.X / -5 + screenPosition.Y / -3) / 2;
+            BlockFace closest = new BlockFace();
+            float distance = 1000;
 
-            for (int i = (int)Chunk.size.Z; i >= -1; i--)
+            foreach (Chunk chunk in World.instance.renderedChunks)
             {
-                Vector3 blockPosition = new Vector3((int)worldPosition.X - i, (int)worldPosition.Y - i, i + 2);
-                if (World.instance.GetBlock((int)blockPosition.X, (int)blockPosition.Y, (int)blockPosition.Z) > 0)
+                foreach (BlockFace face in chunk.faces)
                 {
-                    return blockPosition;
-                }
-                blockPosition.Z--;
-                if (World.instance.GetBlock((int)blockPosition.X, (int)blockPosition.Y, (int)blockPosition.Z) > 0)
-                {
-                    return blockPosition;
+                    Vector2 center = new Vector2(Camera.windowWidth, Camera.windowHeight) / (2 * Camera.pixelSize);
+                    Vector2 facePosition = center + face.screenPosition + new Vector2(0, 8) - Camera.PixelPosition();
+                    float currentDistance = Vector2.Distance(facePosition, screenPosition);
+                    if (currentDistance < distance)
+                    {
+                        closest = face;
+                        distance = currentDistance;
+                    }
                 }
             }
-            return Vector3.Zero;
+
+            return closest.blockPosition;
         }
     }
 }

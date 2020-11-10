@@ -14,7 +14,8 @@ namespace BlockGame
         World parent;
         public Vector2 chunkPosition;
         byte[,,] blocks;
-        List<BlockFace> faces = new List<BlockFace>();
+
+        public List<BlockFace> faces = new List<BlockFace>();
 
         public bool UpdateNeeded;
 
